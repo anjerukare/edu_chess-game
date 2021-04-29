@@ -1,0 +1,90 @@
+
+pieces.png
+size: 256,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+black_bishop
+  rotate: false
+  xy: 47, 185
+  size: 44, 44
+  orig: 44, 44
+  offset: 0, 0
+  index: -1
+black_king
+  rotate: false
+  xy: 1, 93
+  size: 44, 44
+  orig: 44, 44
+  offset: 0, 0
+  index: -1
+black_knight
+  rotate: false
+  xy: 47, 139
+  size: 44, 44
+  orig: 44, 44
+  offset: 0, 0
+  index: -1
+black_pawn
+  rotate: false
+  xy: 1, 139
+  size: 44, 44
+  orig: 44, 44
+  offset: 0, 0
+  index: -1
+black_queen
+  rotate: false
+  xy: 93, 185
+  size: 44, 44
+  orig: 44, 44
+  offset: 0, 0
+  index: -1
+black_rook
+  rotate: false
+  xy: 1, 47
+  size: 44, 44
+  orig: 44, 44
+  offset: 0, 0
+  index: -1
+white_bishop
+  rotate: false
+  xy: 47, 93
+  size: 44, 44
+  orig: 44, 44
+  offset: 0, 0
+  index: -1
+white_king
+  rotate: false
+  xy: 93, 139
+  size: 44, 44
+  orig: 44, 44
+  offset: 0, 0
+  index: -1
+white_knight
+  rotate: false
+  xy: 139, 185
+  size: 44, 44
+  orig: 44, 44
+  offset: 0, 0
+  index: -1
+white_pawn
+  rotate: false
+  xy: 1, 185
+  size: 44, 44
+  orig: 44, 44
+  offset: 0, 0
+  index: -1
+white_queen
+  rotate: false
+  xy: 1, 1
+  size: 44, 44
+  orig: 44, 44
+  offset: 0, 0
+  index: -1
+white_rook
+  rotate: false
+  xy: 47, 47
+  size: 44, 44
+  orig: 44, 44
+  offset: 0, 0
+  index: -1
