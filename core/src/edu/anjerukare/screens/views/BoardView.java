@@ -145,6 +145,7 @@ public class BoardView extends Group {
         TileView targetTile = getTileAt(targetPoint);
         targetTile.piece = piece;
         /* add action to present the move */
+        piece.toFront();
         piece.addAction(moveTo(targetTile.getX(), targetTile.getY(), 1));
     }
 
