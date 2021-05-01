@@ -4,13 +4,13 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import edu.anjerukare.screens.Piece;
-import edu.anjerukare.screens.Team;
+import edu.anjerukare.screens.enums.PieceType;
+import edu.anjerukare.screens.enums.Team;
 
 abstract public class PieceView extends Actor {
 
     public TextureRegion textureRegion;
-    public Piece type;
+    public PieceType type;
     public Team team;
 
     public PieceView(Team team) {

@@ -6,7 +6,7 @@ import edu.anjerukare.screens.utils.Point;
 import java.util.ArrayList;
 import java.util.List;
 
-import static edu.anjerukare.screens.Piece.KNIGHT;
+import static edu.anjerukare.screens.enums.PieceType.KNIGHT;
 
 public class Knight extends Piece {
 

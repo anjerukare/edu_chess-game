@@ -1,11 +1,11 @@
 package edu.anjerukare.screens.views.pieces;
 
 import edu.anjerukare.Assets;
-import edu.anjerukare.screens.Team;
+import edu.anjerukare.screens.enums.Team;
 import edu.anjerukare.screens.views.PieceView;
 
 import static edu.anjerukare.Assets.piecesAtlas;
-import static edu.anjerukare.screens.Piece.ROOK;
+import static edu.anjerukare.screens.enums.PieceType.ROOK;
 
 public class RookView extends PieceView {
 

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static edu.anjerukare.screens.Piece.KING;
+import static edu.anjerukare.screens.enums.PieceType.KING;
 
 public class King extends Piece {
 

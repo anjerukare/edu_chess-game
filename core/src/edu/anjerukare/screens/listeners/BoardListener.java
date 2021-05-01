@@ -32,9 +32,9 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.delay;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
 import static edu.anjerukare.Assets.pieceCaptureSound;
 import static edu.anjerukare.Assets.pieceMoveSound;
-import static edu.anjerukare.screens.Piece.KING;
-import static edu.anjerukare.screens.Team.WHITE;
-import static edu.anjerukare.screens.Piece.PAWN;
+import static edu.anjerukare.screens.enums.PieceType.KING;
+import static edu.anjerukare.screens.enums.Team.WHITE;
+import static edu.anjerukare.screens.enums.PieceType.PAWN;
 import static edu.anjerukare.screens.views.TileView.State.SELECTED;
 
 public class BoardListener extends ClickListener {
