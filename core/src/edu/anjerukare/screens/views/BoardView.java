@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import edu.anjerukare.screens.Team;
+import edu.anjerukare.screens.enums.Team;
 import edu.anjerukare.screens.utils.Point;
 import edu.anjerukare.screens.views.pieces.*;
 

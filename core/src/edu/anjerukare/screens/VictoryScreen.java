@@ -8,10 +8,11 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import edu.anjerukare.Assets;
 import edu.anjerukare.Chess;
+import edu.anjerukare.screens.enums.Team;
 import edu.anjerukare.screens.utils.ManagedScreenAdapter;
 
 import static edu.anjerukare.Assets.bigFont;
-import static edu.anjerukare.screens.Team.WHITE;
+import static edu.anjerukare.screens.enums.Team.WHITE;
 
 public class VictoryScreen extends ManagedScreenAdapter {
 

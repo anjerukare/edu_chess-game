@@ -8,7 +8,7 @@ import edu.anjerukare.screens.utils.Point;
 import java.util.ArrayList;
 import java.util.List;
 
-import static edu.anjerukare.screens.Piece.PAWN;
+import static edu.anjerukare.screens.enums.PieceType.PAWN;
 
 public class Pawn extends Piece {
 

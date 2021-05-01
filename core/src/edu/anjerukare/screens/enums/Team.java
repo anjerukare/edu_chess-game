@@ -1,4 +1,4 @@
-package edu.anjerukare.screens;
+package edu.anjerukare.screens.enums;
 
 public enum Team {
     WHITE, BLACK

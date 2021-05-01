@@ -7,7 +7,7 @@ import edu.anjerukare.screens.utils.Point;
 import java.util.ArrayList;
 import java.util.List;
 
-import static edu.anjerukare.screens.Piece.ROOK;
+import static edu.anjerukare.screens.enums.PieceType.ROOK;
 
 public class Rook extends Piece {
 

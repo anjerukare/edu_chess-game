@@ -1,21 +1,21 @@
 package edu.anjerukare.screens.models;
 
 import com.badlogic.gdx.Gdx;
-import edu.anjerukare.screens.Piece;
-import edu.anjerukare.screens.Team;
+import edu.anjerukare.screens.enums.PieceType;
+import edu.anjerukare.screens.enums.Team;
 import edu.anjerukare.screens.models.pieces.*;
 import edu.anjerukare.screens.utils.Point;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static edu.anjerukare.screens.Piece.*;
+import static edu.anjerukare.screens.enums.PieceType.*;
 
 public class Board {
 
     public static Board instance;
 
-    private final edu.anjerukare.screens.models.Piece[][] pieces = new edu.anjerukare.screens.models.Piece[8][8];
+    private final Piece[][] pieces = new Piece[8][8];
     private final List<Pawn> movedPawns = new ArrayList<>();
     private final List<King> movedKings = new ArrayList<>();
     private final List<Rook> movedRooks = new ArrayList<>();
@@ -52,12 +52,12 @@ public class Board {
             addPiece(new Pawn(), black, 6, j);
     }
 
-    public void addPiece(edu.anjerukare.screens.models.Piece piece, Player player, int row, int col) {
+    public void addPiece(Piece piece, Player player, int row, int col) {
         player.pieces.add(piece);
         pieces[row][col] = piece;
     }
 
-    public Point getPointForPiece(edu.anjerukare.screens.models.Piece piece) {
+    public Point getPointForPiece(Piece piece) {
         for (int i = 0; i < 8; ++i) {
             for (int j = 0; j < 8; ++j) {
                 if (pieces[i][j] == piece) return new Point(j, i);
@@ -66,17 +66,17 @@ public class Board {
         return null;
     }
 
-    public edu.anjerukare.screens.models.Piece getPieceAt(Point point) {
+    public Piece getPieceAt(Point point) {
         if (point.x > 7 || point.y > 7 || point.x < 0 || point.y < 0)
             return null;
         return pieces[point.y][point.x];
     }
 
-    public boolean doesPieceBelongToCurrentPlayer(edu.anjerukare.screens.models.Piece piece) {
+    public boolean doesPieceBelongToCurrentPlayer(Piece piece) {
         return currentPlayer.pieces.contains(piece);
     }
 
-    public void move(edu.anjerukare.screens.models.Piece piece, Point targetPoint) {
+    public void move(Piece piece, Point targetPoint) {
         if (piece.type == PAWN && !hasPawnMoved((Pawn) piece))
             movedPawns.add((Pawn) piece);
         if (piece.type == KING && !hasKingMoved((King) piece))
@@ -95,7 +95,7 @@ public class Board {
         return movedPawns.contains(pawn);
     }
 
-    public List<Point> getMovesForPiece(edu.anjerukare.screens.models.Piece piece) {
+    public List<Point> getMovesForPiece(Piece piece) {
         Point point = getPointForPiece(piece);
         List<Point> locations = piece.getMoveLocations(point);
 
@@ -106,7 +106,7 @@ public class Board {
     }
 
     public boolean isFriendlyPieceAt(Point point) {
-        edu.anjerukare.screens.models.Piece piece = getPieceAt(point);
+        Piece piece = getPieceAt(point);
 
         if (piece == null)
             return false;
@@ -114,14 +114,14 @@ public class Board {
     }
 
     public void capturePieceAt(Point point) {
-        edu.anjerukare.screens.models.Piece pieceToCapture = getPieceAt(point);
+        Piece pieceToCapture = getPieceAt(point);
         if (pieceToCapture.type == KING)
             Gdx.app.log("Game", "Current player wins!");
         currentPlayer.capturedPieces.add(pieceToCapture);
         pieces[point.y][point.x] = null;
     }
 
-    public void promotePawn(Pawn pawn, Piece typeToPromote) {
+    public void promotePawn(Pawn pawn, PieceType typeToPromote) {
         Point point = getPointForPiece(pawn);
         switch (typeToPromote) {
             case QUEEN:
@@ -155,7 +155,7 @@ public class Board {
 
     public List<Rook> getCurrentPlayerRooks() {
         List<Rook> rooks = new ArrayList<>();
-        for (edu.anjerukare.screens.models.Piece piece : currentPlayer.pieces) {
+        for (Piece piece : currentPlayer.pieces) {
             if (piece.type == ROOK) rooks.add((Rook) piece);
         }
         return rooks;
@@ -164,7 +164,7 @@ public class Board {
     /**
      * Checks emptiness of horizontal tiles between pieces.
      */
-    public boolean areHorizontalTilesBetweenPiecesEmpty(edu.anjerukare.screens.models.Piece pieceA, edu.anjerukare.screens.models.Piece pieceB) {
+    public boolean areHorizontalTilesBetweenPiecesEmpty(Piece pieceA, Piece pieceB) {
         Point pointA = getPointForPiece(pieceA);
         Point pointB = getPointForPiece(pieceB);
         int dj = pointA.x < pointB.x ? 1 : -1;

@@ -3,12 +3,12 @@ package edu.anjerukare.screens.views;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import edu.anjerukare.Assets;
-import edu.anjerukare.screens.Team;
+import edu.anjerukare.screens.enums.Team;
 import edu.anjerukare.screens.views.pieces.*;
 
 import static com.badlogic.gdx.scenes.scene2d.Touchable.childrenOnly;
 import static edu.anjerukare.Assets.piecesAtlas;
-import static edu.anjerukare.screens.Team.WHITE;
+import static edu.anjerukare.screens.enums.Team.WHITE;
 
 public class PawnPromotingView extends Group {
 
