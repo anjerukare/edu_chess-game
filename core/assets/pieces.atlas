@@ -1,89 +1,96 @@
 
 pieces.png
-size: 256,256
+size: 1024, 64
 format: RGBA8888
-filter: Nearest,Nearest
+filter: Nearest, Nearest
 repeat: none
 black_bishop
   rotate: false
-  xy: 47, 185
+  xy: 140, 2
   size: 44, 44
   orig: 44, 44
   offset: 0, 0
   index: -1
 black_king
   rotate: false
-  xy: 1, 93
+  xy: 324, 2
   size: 44, 44
   orig: 44, 44
   offset: 0, 0
   index: -1
 black_knight
   rotate: false
-  xy: 47, 139
+  xy: 278, 2
   size: 44, 44
   orig: 44, 44
   offset: 0, 0
   index: -1
 black_pawn
   rotate: false
-  xy: 1, 139
+  xy: 94, 2
   size: 44, 44
   orig: 44, 44
   offset: 0, 0
   index: -1
 black_queen
   rotate: false
-  xy: 93, 185
+  xy: 462, 2
   size: 44, 44
   orig: 44, 44
   offset: 0, 0
   index: -1
 black_rook
   rotate: false
-  xy: 1, 47
+  xy: 508, 2
+  size: 44, 44
+  orig: 44, 44
+  offset: 0, 0
+  index: -1
+king_checked
+  rotate: false
+  xy: 232, 2
   size: 44, 44
   orig: 44, 44
   offset: 0, 0
   index: -1
 white_bishop
   rotate: false
-  xy: 47, 93
+  xy: 416, 2
   size: 44, 44
   orig: 44, 44
   offset: 0, 0
   index: -1
 white_king
   rotate: false
-  xy: 93, 139
+  xy: 186, 2
   size: 44, 44
   orig: 44, 44
   offset: 0, 0
   index: -1
 white_knight
   rotate: false
-  xy: 139, 185
+  xy: 2, 2
   size: 44, 44
   orig: 44, 44
   offset: 0, 0
   index: -1
 white_pawn
   rotate: false
-  xy: 1, 185
+  xy: 48, 2
   size: 44, 44
   orig: 44, 44
   offset: 0, 0
   index: -1
 white_queen
   rotate: false
-  xy: 1, 1
+  xy: 554, 2
   size: 44, 44
   orig: 44, 44
   offset: 0, 0
   index: -1
 white_rook
   rotate: false
-  xy: 47, 47
+  xy: 370, 2
   size: 44, 44
   orig: 44, 44
   offset: 0, 0
