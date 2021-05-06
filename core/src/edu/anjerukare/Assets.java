@@ -34,6 +34,9 @@ public class Assets {
     public final static AssetDescriptor<Sound> pieceCaptureSound =
             new AssetDescriptor<>("piece-capture.mp3", Sound.class);
 
+    public final static AssetDescriptor<Sound> checkSound =
+            new AssetDescriptor<Sound>("check.mp3", Sound.class);
+
     public static void load() {
         manager.load(piecesAtlas);
 
@@ -54,6 +57,7 @@ public class Assets {
 
         manager.load(pieceMoveSound);
         manager.load(pieceCaptureSound);
+        manager.load(checkSound);
     }
 
     public static void finishLoading() {

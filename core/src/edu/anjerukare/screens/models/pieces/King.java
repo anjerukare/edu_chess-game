@@ -12,8 +12,6 @@ import static edu.anjerukare.screens.enums.PieceType.KING;
 
 public class King extends Piece {
 
-    public boolean checked;
-
     public King() {
         type = KING;
     }

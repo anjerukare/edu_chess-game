@@ -30,8 +30,7 @@ import java.util.List;
 import static com.badlogic.gdx.scenes.scene2d.Touchable.disabled;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.delay;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
-import static edu.anjerukare.Assets.pieceCaptureSound;
-import static edu.anjerukare.Assets.pieceMoveSound;
+import static edu.anjerukare.Assets.*;
 import static edu.anjerukare.screens.enums.PieceType.KING;
 import static edu.anjerukare.screens.enums.Team.WHITE;
 import static edu.anjerukare.screens.enums.PieceType.PAWN;
@@ -70,7 +69,7 @@ public class BoardListener extends ClickListener {
 
                     if (piece.type == KING) {
                         King king = (King) piece;
-                        List<Point> castlingLocations = king.getCastlingLocations(tilePos);
+                        List<Point> castlingLocations = board.getCastlingMoves(king);
                         if (castlingLocations != null) {
                             boardView.markTilesAsCastlingAvailable(castlingLocations);
                         }
@@ -78,7 +77,7 @@ public class BoardListener extends ClickListener {
 
                     if (piece.type == PAWN) {
                         Pawn pawn = (Pawn) piece;
-                        Point enPassantLocation = pawn.getEnPassantLocation(tilePos);
+                        Point enPassantLocation = board.getEnPassantMove(pawn);
                         if (enPassantLocation != null) {
                             boardView.markTileAsEnPassantAvailable(enPassantLocation);
                         }
@@ -95,6 +94,8 @@ public class BoardListener extends ClickListener {
                 board.move(piece, tilePos);
                 Assets.get(pieceMoveSound).play(0.4f);
 
+                updateCheckState();
+
                 if (piece.type == PAWN && (tilePos.y == 0 || tilePos.y == 7)) {
                     boardView.overlapped = true;
                     boardView.setTouchable(disabled);
@@ -104,6 +105,8 @@ public class BoardListener extends ClickListener {
                 } else {
                     board.passTurnToNextPlayer();
                 }
+
+                updateCheckState();
                 break;
             }
             case CAPTUREAVAILABLE: {
@@ -126,6 +129,8 @@ public class BoardListener extends ClickListener {
                             run(() -> manager.pushScreen("victory", "fallingBars"))));
                 }
 
+                updateCheckState();
+
                 if (piece.type == PAWN && (tilePos.y == 0 || tilePos.y == 7)) {
                     boardView.overlapped = true;
                     boardView.setTouchable(disabled);
@@ -135,6 +140,8 @@ public class BoardListener extends ClickListener {
                 } else {
                     board.passTurnToNextPlayer();
                 }
+
+                updateCheckState();
                 break;
             }
             case CASTLINGAVAILABLE: {
@@ -161,7 +168,10 @@ public class BoardListener extends ClickListener {
                 board.move(board.getPieceAt(point), tilePos);
                 Assets.get(pieceCaptureSound).play(0.3f);
 
+                updateCheckState();
+
                 board.passTurnToNextPlayer();
+                updateCheckState();
                 break;
             }
         }
@@ -173,5 +183,16 @@ public class BoardListener extends ClickListener {
                 y + boardView.getY() + (pawn.team == WHITE ? 44 : 0),
                 (pawn.team == WHITE ? Align.topLeft : Align.bottomLeft));
         pawnPromotingView.setVisible(true);
+    }
+
+    private void updateCheckState() {
+        Point kingPosition = board.getPointForPiece(board.getCurrentPlayerKing());
+        KingView kingView = (KingView) boardView.getPieceAt(kingPosition);
+        if (board.isCheck()) {
+            Assets.get(checkSound).play(0.15f);
+            kingView.checked = true;
+        } else {
+            kingView.checked = false;
+        }
     }
 }
