@@ -20,7 +20,7 @@ public class Pawn extends Piece {
     public List<Point> getMoveLocations(Point point) {
         List<Point> locations = new ArrayList<>();
 
-        int forwardDirection = Board.instance.currentPlayer.forward;
+        int forwardDirection = Board.instance.getForwardForPiece(this);
         Point forwardOne = new Point(point.x, point.y + forwardDirection);
         if (Board.instance.getPieceAt(forwardOne) == null)
             locations.add(forwardOne);
@@ -56,14 +56,14 @@ public class Pawn extends Piece {
 
         if (!Board.instance.doesPieceBelongToCurrentPlayer(pieceAtLeft) &&
                 pieceAtLeft == lastMove.piece) {
-            int forwardDirection = Board.instance.currentPlayer.forward;
+            int forwardDirection = Board.instance.getForwardForPiece(this);
             leftOne.y += forwardDirection;
             return leftOne;
         }
 
         if (!Board.instance.doesPieceBelongToCurrentPlayer(pieceAtRight) &&
                 pieceAtRight == lastMove.piece) {
-            int forwardDirection = Board.instance.currentPlayer.forward;
+            int forwardDirection = Board.instance.getForwardForPiece(this);
             rightOne.y += forwardDirection;
             return rightOne;
         }
