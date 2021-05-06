@@ -244,7 +244,7 @@ public class Board {
     public List<Point> getCastlingMoves(King king) {
         Point kingPosition = getPointForPiece(king);
         List<Point> castlingLocations = king.getCastlingLocations(kingPosition);
-        if (castlingLocations.isEmpty()) return null;
+        if (castlingLocations == null) return null;
         if (isCheck()) return null;
 
         Iterator<Point> iterator = castlingLocations.iterator();
