@@ -262,6 +262,7 @@ public class Board {
             }
         }
 
+        if (castlingLocations.isEmpty()) return null;
         return castlingLocations;
     }
 
@@ -293,6 +294,19 @@ public class Board {
 
     public Team getCurrentPlayerTeam() {
         return currentPlayer == white ? Team.WHITE : Team.BLACK;
+    }
+
+    public boolean hasCurrentPlayerNoMoves() {
+        for (Piece piece : currentPlayer.pieces) {
+            if (!getMovesForPiece(piece).isEmpty()) return false;
+
+            if (piece.type == PAWN) {
+                if (getEnPassantMove((Pawn) piece) != null) return false;
+            } else if (piece.type == KING) {
+                if (getCastlingMoves((King) piece) != null) return false;
+            }
+        }
+        return true;
     }
 
     public void passTurnToNextPlayer() {
