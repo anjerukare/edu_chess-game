@@ -86,7 +86,7 @@ public class BoardView extends Group {
             Gdx.gl.glEnable(GL20.GL_BLEND);
             Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
             renderer.begin(ShapeRenderer.ShapeType.Filled);
-            renderer.setColor(0, 0, 0, .25f);
+            renderer.setColor(0, 0, 0, .5f);
             renderer.rect(getX(), getY(), getWidth(), getHeight());
             renderer.end();
             Gdx.gl.glDisable(GL20.GL_BLEND);

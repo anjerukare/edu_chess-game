@@ -12,10 +12,8 @@ import edu.anjerukare.screens.models.pieces.King;
 import edu.anjerukare.screens.models.pieces.Pawn;
 import edu.anjerukare.screens.models.pieces.Rook;
 import edu.anjerukare.screens.utils.Point;
-import edu.anjerukare.screens.views.BoardView;
-import edu.anjerukare.screens.views.PawnPromotingView;
-import edu.anjerukare.screens.views.PieceView;
-import edu.anjerukare.screens.views.TileView;
+import edu.anjerukare.screens.views.*;
+import edu.anjerukare.screens.views.VictoryView.GameResult;
 import edu.anjerukare.screens.views.pieces.KingView;
 import edu.anjerukare.screens.views.pieces.PawnView;
 import edu.anjerukare.screens.views.pieces.RookView;
@@ -29,6 +27,8 @@ import static edu.anjerukare.screens.enums.PieceType.KING;
 import static edu.anjerukare.screens.enums.Team.WHITE;
 import static edu.anjerukare.screens.enums.PieceType.PAWN;
 import static edu.anjerukare.screens.views.TileView.State.SELECTED;
+import static edu.anjerukare.screens.views.VictoryView.GameResult.CHECKMATE;
+import static edu.anjerukare.screens.views.VictoryView.GameResult.STALEMATE;
 
 public class BoardListener extends ClickListener {
 
@@ -37,13 +37,16 @@ public class BoardListener extends ClickListener {
     protected final Board board;
     protected final BoardView boardView;
     protected final PawnPromotingView pawnPromotingView;
+    protected final VictoryView victoryView;
 
-    public BoardListener(Board board, BoardView boardView, PawnPromotingView pawnPromotingView) {
+    public BoardListener(Board board, BoardView boardView, PawnPromotingView pawnPromotingView,
+                         VictoryView victoryView) {
         game = (Chess) Gdx.app.getApplicationListener();
 
         this.board = board;
         this.boardView = boardView;
         this.pawnPromotingView = pawnPromotingView;
+        this.victoryView = victoryView;
     }
 
     @Override
@@ -103,9 +106,9 @@ public class BoardListener extends ClickListener {
                 updateCheckState();
                 if (board.hasCurrentPlayerNoMoves()) {
                     if (board.isCheck())
-                        System.out.println("It's checkmate");
+                        showVictoryOverlay(CHECKMATE);
                     else
-                        System.out.println("It's stalemate");
+                        showVictoryOverlay(STALEMATE);
                 }
                 break;
             }
@@ -136,9 +139,9 @@ public class BoardListener extends ClickListener {
                 updateCheckState();
                 if (board.hasCurrentPlayerNoMoves()) {
                     if (board.isCheck())
-                        System.out.println("It's checkmate");
+                        showVictoryOverlay(CHECKMATE);
                     else
-                        System.out.println("It's stalemate");
+                        showVictoryOverlay(STALEMATE);
                 }
                 break;
             }
@@ -152,6 +155,13 @@ public class BoardListener extends ClickListener {
                 Assets.get(pieceMoveSound).play(0.4f);
 
                 board.passTurnToNextPlayer();
+                updateCheckState();
+                if (board.hasCurrentPlayerNoMoves()) {
+                    if (board.isCheck())
+                        showVictoryOverlay(CHECKMATE);
+                    else
+                        showVictoryOverlay(STALEMATE);
+                }
                 break;
             }
             case ENPASSANTAVAILABLE: {
@@ -172,9 +182,9 @@ public class BoardListener extends ClickListener {
                 updateCheckState();
                 if (board.hasCurrentPlayerNoMoves()) {
                     if (board.isCheck())
-                        System.out.println("It's checkmate");
+                        showVictoryOverlay(CHECKMATE);
                     else
-                        System.out.println("It's stalemate");
+                        showVictoryOverlay(STALEMATE);
                 }
                 break;
             }
@@ -198,5 +208,14 @@ public class BoardListener extends ClickListener {
         } else {
             kingView.checked = false;
         }
+    }
+
+    private void showVictoryOverlay(GameResult gameResult) {
+        boardView.overlapped = true;
+        boardView.setTouchable(disabled);
+        victoryView.result = gameResult;
+        if (gameResult == CHECKMATE)
+            victoryView.team = board.getOtherPlayerTeam();
+        victoryView.show();
     }
 }

@@ -292,8 +292,8 @@ public class Board {
         return moveLog.get(moveLog.size() - 1);
     }
 
-    public Team getCurrentPlayerTeam() {
-        return currentPlayer == white ? Team.WHITE : Team.BLACK;
+    public Team getOtherPlayerTeam() {
+        return otherPlayer == white ? Team.WHITE : Team.BLACK;
     }
 
     public boolean hasCurrentPlayerNoMoves() {
