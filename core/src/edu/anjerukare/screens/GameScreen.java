@@ -5,12 +5,14 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import edu.anjerukare.Chess;
+import edu.anjerukare.screens.enums.Team;
 import edu.anjerukare.screens.listeners.BoardListener;
 import edu.anjerukare.screens.listeners.PawnPromotingListener;
 import edu.anjerukare.screens.models.Board;
 import edu.anjerukare.screens.utils.ManagedScreenAdapter;
 import edu.anjerukare.screens.views.BoardView;
 import edu.anjerukare.screens.views.PawnPromotingView;
+import edu.anjerukare.screens.views.VictoryView;
 
 public class GameScreen extends ManagedScreenAdapter {
 
@@ -29,12 +31,14 @@ public class GameScreen extends ManagedScreenAdapter {
         PawnPromotingView pawnPromotingView = new PawnPromotingView();
         pawnPromotingView.setPosition((stage.getWidth() - boardView.getWidth()) / 2,
                 (stage.getHeight() - boardView.getHeight()) / 2);
+        VictoryView victoryView = new VictoryView();
 
-        boardView.addListener(new BoardListener(board, boardView, pawnPromotingView));
+        boardView.addListener(new BoardListener(board, boardView, pawnPromotingView, victoryView));
         pawnPromotingView.addListener(new PawnPromotingListener(board, boardView, pawnPromotingView));
 
         stage.addActor(boardView);
         stage.addActor(pawnPromotingView);
+        stage.addActor(victoryView);
     }
 
     @Override
