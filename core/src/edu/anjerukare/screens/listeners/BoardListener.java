@@ -101,6 +101,12 @@ public class BoardListener extends ClickListener {
                 }
 
                 updateCheckState();
+                if (board.hasCurrentPlayerNoMoves()) {
+                    if (board.isCheck())
+                        System.out.println("It's checkmate");
+                    else
+                        System.out.println("It's stalemate");
+                }
                 break;
             }
             case CAPTUREAVAILABLE: {
@@ -128,6 +134,12 @@ public class BoardListener extends ClickListener {
                 }
 
                 updateCheckState();
+                if (board.hasCurrentPlayerNoMoves()) {
+                    if (board.isCheck())
+                        System.out.println("It's checkmate");
+                    else
+                        System.out.println("It's stalemate");
+                }
                 break;
             }
             case CASTLINGAVAILABLE: {
@@ -158,6 +170,12 @@ public class BoardListener extends ClickListener {
 
                 board.passTurnToNextPlayer();
                 updateCheckState();
+                if (board.hasCurrentPlayerNoMoves()) {
+                    if (board.isCheck())
+                        System.out.println("It's checkmate");
+                    else
+                        System.out.println("It's stalemate");
+                }
                 break;
             }
         }
