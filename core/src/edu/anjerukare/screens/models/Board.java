@@ -193,7 +193,9 @@ public class Board {
                 break;
             case ROOK:
                 currentPlayer.pieces.remove(pawn);
-                addPiece(new Rook(), currentPlayer, point.y, point.x);
+                Rook rook = new Rook();
+                addPiece(rook, currentPlayer, point.y, point.x);
+                movedRooks.add(rook);
                 break;
             default:
                 throw new RuntimeException("Wrong piece type to promote");
