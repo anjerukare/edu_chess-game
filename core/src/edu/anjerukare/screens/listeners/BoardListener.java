@@ -2,15 +2,10 @@ package edu.anjerukare.screens.listeners;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
-import de.eskalon.commons.screen.ManagedScreen;
-import de.eskalon.commons.screen.ScreenManager;
-import de.eskalon.commons.screen.transition.ScreenTransition;
 import edu.anjerukare.Assets;
 import edu.anjerukare.Chess;
-import edu.anjerukare.screens.VictoryScreen;
 import edu.anjerukare.screens.models.Board;
 import edu.anjerukare.screens.models.Piece;
 import edu.anjerukare.screens.models.pieces.King;
@@ -29,7 +24,6 @@ import java.util.List;
 
 import static com.badlogic.gdx.scenes.scene2d.Touchable.disabled;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.delay;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
 import static edu.anjerukare.Assets.*;
 import static edu.anjerukare.screens.enums.PieceType.KING;
 import static edu.anjerukare.screens.enums.Team.WHITE;
@@ -120,14 +114,6 @@ public class BoardListener extends ClickListener {
                 Piece piece = board.getPieceAt(point);
                 board.move(piece, tilePos);
                 Assets.get(pieceCaptureSound).play(0.3f);
-
-                if (targetPiece.type == KING) {
-                    ScreenManager<ManagedScreen, ScreenTransition> manager = game.getScreenManager();
-                    VictoryScreen screen = (VictoryScreen) manager.getScreen("victory");
-                    screen.winningTeam = board.getCurrentPlayerTeam();
-                    boardView.addAction(Actions.sequence(delay(1),
-                            run(() -> manager.pushScreen("victory", "fallingBars"))));
-                }
 
                 updateCheckState();
 
