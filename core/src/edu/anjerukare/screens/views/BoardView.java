@@ -60,6 +60,41 @@ public class BoardView extends Group {
         addTile(new TileView(COLOR_BLACK, new RookView(Team.BLACK)), 7, 7);
     }
 
+    public void resetPieces() {
+        for (int i = 0; i < 8; ++i) {
+            for (int j = 0; j < 8; ++j) {
+                removeActor(tiles[i][j].piece);
+                tiles[i][j].piece = null;
+                pieces[i][j] = null;
+            }
+        }
+
+        setPiece(0, 0, new RookView(Team.WHITE));
+        setPiece(0, 1, new KnightView(Team.WHITE));
+        setPiece(0, 2, new BishopView(Team.WHITE));
+        setPiece(0, 3, new QueenView(Team.WHITE));
+        setPiece(0, 4, new KingView(Team.WHITE));
+        setPiece(0, 5, new BishopView(Team.WHITE));
+        setPiece(0, 6, new KnightView(Team.WHITE));
+        setPiece(0, 7, new RookView(Team.WHITE));
+        for (int j = 0; j < 8; ++j)
+            setPiece(1, j, new PawnView(Team.WHITE));
+
+        for (int j = 0; j < 8; ++j)
+            setPiece(6, j, new PawnView(Team.BLACK));
+
+        setPiece(7, 0, new RookView(Team.BLACK));
+        setPiece(7, 1, new KnightView(Team.BLACK));
+        setPiece(7, 2, new BishopView(Team.BLACK));
+        setPiece(7, 3, new QueenView(Team.BLACK));
+        setPiece(7, 4, new KingView(Team.BLACK));
+        setPiece(7, 5, new BishopView(Team.BLACK));
+        setPiece(7, 6, new KnightView(Team.BLACK));
+        setPiece(7, 7, new RookView(Team.BLACK));
+
+        selectedPiece = null;
+    }
+
     public void addTile(TileView tile, int i, int j) {
         tiles[i][j] = tile;
         tile.setPosition(j * 44, i * 44);
@@ -173,6 +208,10 @@ public class BoardView extends Group {
         piece.addAction(sequence(alpha(0, .5f), run(() -> {
             removeActor(piece);
         })));
+    }
+
+    public void setPiece(int i, int j, PieceView pieceToSet) {
+        setPiece(new Point(j, i), pieceToSet);
     }
 
     public void setPiece(Point point, PieceView pieceToSet) {

@@ -1,11 +1,16 @@
 package edu.anjerukare.screens.views;
 
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Align;
+import com.rafaskoberg.gdx.typinglabel.TypingLabel;
 import edu.anjerukare.Assets;
 import edu.anjerukare.screens.enums.Team;
 
+import static com.badlogic.gdx.scenes.scene2d.Touchable.enabled;
+import static com.badlogic.gdx.utils.Align.bottom;
 import static edu.anjerukare.Assets.bigFont;
 import static edu.anjerukare.Assets.smallFont;
 
@@ -20,9 +25,12 @@ public class VictoryView extends Table {
         super();
         setFillParent(true);
         setVisible(false);
+        setTouchable(enabled);
     }
 
     public void show() {
+        clearChildren();
+
         setVisible(true);
         String headerText = "", descriptionText = "";
         switch (result) {
@@ -47,5 +55,11 @@ public class VictoryView extends Table {
 
         Label description = new Label(descriptionText, new LabelStyle(Assets.get(smallFont), null));
         add(description);
+        row();
+
+        TypingLabel reset = new TypingLabel("{WAIT}{JUMP=0.4;0.05;0.5}\nСыграть снова?\n{ENDJUMP}",
+                new LabelStyle(Assets.get(smallFont), null));
+        reset.setAlignment(bottom);
+        add(reset).height(120);
     }
 }

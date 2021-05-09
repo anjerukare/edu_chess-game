@@ -5,9 +5,9 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import edu.anjerukare.Chess;
-import edu.anjerukare.screens.enums.Team;
 import edu.anjerukare.screens.listeners.BoardListener;
 import edu.anjerukare.screens.listeners.PawnPromotingListener;
+import edu.anjerukare.screens.listeners.VictoryListener;
 import edu.anjerukare.screens.models.Board;
 import edu.anjerukare.screens.utils.ManagedScreenAdapter;
 import edu.anjerukare.screens.views.BoardView;
@@ -35,6 +35,7 @@ public class GameScreen extends ManagedScreenAdapter {
 
         boardView.addListener(new BoardListener(board, boardView, pawnPromotingView, victoryView));
         pawnPromotingView.addListener(new PawnPromotingListener(board, boardView, pawnPromotingView));
+        victoryView.addListener(new VictoryListener(victoryView, board, boardView));
 
         stage.addActor(boardView);
         stage.addActor(pawnPromotingView);

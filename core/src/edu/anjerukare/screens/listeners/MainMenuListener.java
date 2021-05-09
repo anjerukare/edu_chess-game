@@ -5,7 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import edu.anjerukare.Chess;
 
-public class MainMenuListener extends InputListener {
+public class MainMenuListener extends AnyKeyListener {
 
     private final Chess game;
 
@@ -14,14 +14,7 @@ public class MainMenuListener extends InputListener {
     }
 
     @Override
-    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+    public void pressed() {
         game.getScreenManager().pushScreen("game", "fallingBars");
-        return true;
-    }
-
-    @Override
-    public boolean keyDown(InputEvent event, int keycode) {
-        game.getScreenManager().pushScreen("game", "fallingBars");
-        return true;
     }
 }

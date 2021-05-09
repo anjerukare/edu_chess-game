@@ -23,11 +23,31 @@ public class Board {
 
     private final Player white = new Player(true);
     private final Player black = new Player(false);
-    public Player currentPlayer = white;
-    public Player otherPlayer = black;
+    public Player currentPlayer;
+    public Player otherPlayer;
 
     public Board() {
         instance = this;
+        reset();
+    }
+
+    public void reset() {
+        for (int i = 0; i < 8; ++i) {
+            for (int j = 0; j < 8; ++j)
+                pieces[i][j] = null;
+        }
+
+        movedPawns.clear();
+        movedKings.clear();
+        movedRooks.clear();
+        moveLog.clear();
+
+        white.pieces.clear();
+        white.capturedPieces.clear();
+        black.pieces.clear();
+        black.capturedPieces.clear();
+        currentPlayer = white;
+        otherPlayer = black;
 
         addPiece(new Rook(), white, 0, 0);
         addPiece(new Knight(), white, 0, 1);
