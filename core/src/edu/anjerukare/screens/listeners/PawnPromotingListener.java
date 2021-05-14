@@ -6,24 +6,26 @@ import edu.anjerukare.screens.models.Board;
 import edu.anjerukare.screens.models.Piece;
 import edu.anjerukare.screens.models.pieces.Pawn;
 import edu.anjerukare.screens.utils.Point;
-import edu.anjerukare.screens.views.BoardView;
-import edu.anjerukare.screens.views.PawnPromotingView;
-import edu.anjerukare.screens.views.PieceView;
-import edu.anjerukare.screens.views.TileView;
+import edu.anjerukare.screens.views.*;
 import edu.anjerukare.screens.views.pieces.BishopView;
 import edu.anjerukare.screens.views.pieces.KnightView;
 import edu.anjerukare.screens.views.pieces.QueenView;
 import edu.anjerukare.screens.views.pieces.RookView;
 
 import static com.badlogic.gdx.scenes.scene2d.Touchable.childrenOnly;
+import static edu.anjerukare.screens.views.VictoryView.GameResult.CHECKMATE;
+import static edu.anjerukare.screens.views.VictoryView.GameResult.STALEMATE;
 
 public class PawnPromotingListener extends ClickListener {
+
+    private final BoardListener boardListener;
 
     private final Board board;
     private final BoardView boardView;
     private final PawnPromotingView pawnPromotingView;
 
-    public PawnPromotingListener(Board board, BoardView boardView, PawnPromotingView pawnPromotingView) {
+    public PawnPromotingListener(BoardListener boardListener, Board board, BoardView boardView, PawnPromotingView pawnPromotingView) {
+        this.boardListener = boardListener;
         this.board = board;
         this.boardView = boardView;
         this.pawnPromotingView = pawnPromotingView;
@@ -56,5 +58,12 @@ public class PawnPromotingListener extends ClickListener {
         boardView.overlapped = false;
         boardView.setTouchable(childrenOnly);
         board.passTurnToNextPlayer();
+        boardListener.updateCheckState();
+        if (board.hasCurrentPlayerNoMoves()) {
+            if (board.isCheck())
+                boardListener.showVictoryOverlay(CHECKMATE);
+            else
+                boardListener.showVictoryOverlay(STALEMATE);
+        }
     }
 }

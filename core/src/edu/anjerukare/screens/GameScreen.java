@@ -33,8 +33,9 @@ public class GameScreen extends ManagedScreenAdapter {
                 (stage.getHeight() - boardView.getHeight()) / 2);
         VictoryView victoryView = new VictoryView();
 
-        boardView.addListener(new BoardListener(board, boardView, pawnPromotingView, victoryView));
-        pawnPromotingView.addListener(new PawnPromotingListener(board, boardView, pawnPromotingView));
+        BoardListener boardListener = new BoardListener(board, boardView, pawnPromotingView, victoryView);
+        boardView.addListener(boardListener);
+        pawnPromotingView.addListener(new PawnPromotingListener(boardListener, board, boardView, pawnPromotingView));
         victoryView.addListener(new VictoryListener(victoryView, board, boardView));
 
         stage.addActor(boardView);

@@ -199,7 +199,7 @@ public class BoardListener extends ClickListener {
         pawnPromotingView.setVisible(true);
     }
 
-    private void updateCheckState() {
+    public void updateCheckState() {
         Point kingPosition = board.getPointForPiece(board.getCurrentPlayerKing());
         KingView kingView = (KingView) boardView.getPieceAt(kingPosition);
         if (board.isCheck()) {
@@ -210,7 +210,7 @@ public class BoardListener extends ClickListener {
         }
     }
 
-    private void showVictoryOverlay(GameResult gameResult) {
+    public void showVictoryOverlay(GameResult gameResult) {
         boardView.overlapped = true;
         boardView.setTouchable(disabled);
         victoryView.result = gameResult;
