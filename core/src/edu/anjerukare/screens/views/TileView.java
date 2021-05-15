@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
+import static edu.anjerukare.Assets.*;
 import static edu.anjerukare.screens.views.TileView.State.*;
 
 public class TileView extends Actor {
@@ -12,15 +13,6 @@ public class TileView extends Actor {
     public enum State {
         DEFAULT, SELECTED, MOVEAVAILABLE, CAPTUREAVAILABLE, CASTLINGAVAILABLE, ENPASSANTAVAILABLE
     }
-
-    public final static Color COLOR_WHITE = Color.valueOf("e1e1e1");
-    public final static Color COLOR_BLACK = Color.valueOf("1e1e1e");
-    public final static Color COLOR_LIGHT_GREEN = new Color(COLOR_WHITE).lerp(Color.valueOf("2ecc71"), .75f);
-    public final static Color COLOR_DARK_GREEN = new Color(COLOR_BLACK).lerp(Color.valueOf("2ecc71"), .75f);
-    public final static Color COLOR_LIGHT_RED = new Color(COLOR_WHITE).lerp(Color.valueOf("e74c3c"), .75f);
-    public final static Color COLOR_DARK_RED = new Color(COLOR_BLACK).lerp(Color.valueOf("e74c3c"), .75f);
-    public final static Color COLOR_LIGHT_PURPLE = new Color(COLOR_WHITE).lerp(Color.valueOf("9b59b6"), .75f);
-    public final static Color COLOR_DARK_PURPLE = new Color(COLOR_BLACK).lerp(Color.valueOf("9b59b6"), .75f);
 
     public PieceView piece;
     public final Color color;

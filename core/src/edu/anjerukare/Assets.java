@@ -5,6 +5,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
@@ -35,7 +36,19 @@ public class Assets {
             new AssetDescriptor<>("piece-capture.mp3", Sound.class);
 
     public final static AssetDescriptor<Sound> checkSound =
-            new AssetDescriptor<Sound>("check.mp3", Sound.class);
+            new AssetDescriptor<>("check.mp3", Sound.class);
+
+    public final static Color COLOR_PURE_WHITE = Color.valueOf("ffffff");
+    public final static Color COLOR_WHITE = Color.valueOf("a8a5a0");
+    public final static Color COLOR_LIGHT_WHITE = Color.valueOf("d1cfc8");
+    public final static Color COLOR_GRAY = Color.valueOf("3e414e");
+    public final static Color COLOR_BLACK = Color.valueOf("1a181f");
+    public final static Color COLOR_LIGHT_GREEN = new Color(COLOR_WHITE).lerp(Color.valueOf("2ecc71"), .4f);
+    public final static Color COLOR_DARK_GREEN = new Color(COLOR_GRAY).lerp(Color.valueOf("2ecc71"), .4f);
+    public final static Color COLOR_LIGHT_RED = new Color(COLOR_WHITE).lerp(Color.valueOf("e74c3c"), .4f);
+    public final static Color COLOR_DARK_RED = new Color(COLOR_GRAY).lerp(Color.valueOf("e74c3c"), .4f);
+    public final static Color COLOR_LIGHT_PURPLE = new Color(COLOR_WHITE).lerp(Color.valueOf("9b59b6"), .4f);
+    public final static Color COLOR_DARK_PURPLE = new Color(COLOR_GRAY).lerp(Color.valueOf("9b59b6"), .4f);
 
     public static void load() {
         manager.load(piecesAtlas);

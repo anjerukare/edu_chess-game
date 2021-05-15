@@ -1,6 +1,7 @@
 package edu.anjerukare.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
@@ -18,7 +19,7 @@ import edu.anjerukare.screens.views.PawnPromotingView;
 import edu.anjerukare.screens.views.VictoryView;
 
 import static com.badlogic.gdx.utils.Align.center;
-import static edu.anjerukare.Assets.bigFont;
+import static edu.anjerukare.Assets.*;
 
 public class GameScreen extends ManagedScreenAdapter {
 
@@ -59,7 +60,7 @@ public class GameScreen extends ManagedScreenAdapter {
     }
 
     private void initLabels(BoardView boardView) {
-        LabelStyle labelStyle = new LabelStyle(Assets.get(bigFont), null);
+        LabelStyle labelStyle = new LabelStyle(Assets.get(bigFont), COLOR_LIGHT_WHITE);
 
         Table digits = new Table();
         for (int i = 0; i < 8; ++i) {
@@ -89,6 +90,11 @@ public class GameScreen extends ManagedScreenAdapter {
         stage.getViewport().apply();
         stage.act(delta);
         stage.draw();
+    }
+
+    @Override
+    public Color getClearColor() {
+        return COLOR_BLACK;
     }
 
     @Override
