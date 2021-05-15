@@ -14,9 +14,8 @@ import java.util.List;
 import static com.badlogic.gdx.scenes.scene2d.Touchable.childrenOnly;
 import static com.badlogic.gdx.scenes.scene2d.Touchable.disabled;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
-import static edu.anjerukare.screens.views.TileView.COLOR_BLACK;
-import static edu.anjerukare.screens.views.TileView.COLOR_WHITE;
 import static edu.anjerukare.screens.views.TileView.State.*;
+import static edu.anjerukare.Assets.*;
 
 public class BoardView extends Group {
 
@@ -32,32 +31,32 @@ public class BoardView extends Group {
         setSize(352, 352);
         setTouchable(childrenOnly);
 
-        addTile(new TileView(COLOR_BLACK, new RookView(Team.WHITE)), 0, 0);
+        addTile(new TileView(COLOR_GRAY, new RookView(Team.WHITE)), 0, 0);
         addTile(new TileView(COLOR_WHITE, new KnightView(Team.WHITE)), 0, 1);
-        addTile(new TileView(COLOR_BLACK, new BishopView(Team.WHITE)), 0, 2);
+        addTile(new TileView(COLOR_GRAY, new BishopView(Team.WHITE)), 0, 2);
         addTile(new TileView(COLOR_WHITE, new QueenView(Team.WHITE)), 0, 3);
-        addTile(new TileView(COLOR_BLACK, new KingView(Team.WHITE)), 0, 4);
+        addTile(new TileView(COLOR_GRAY, new KingView(Team.WHITE)), 0, 4);
         addTile(new TileView(COLOR_WHITE, new BishopView(Team.WHITE)), 0, 5);
-        addTile(new TileView(COLOR_BLACK, new KnightView(Team.WHITE)), 0, 6);
+        addTile(new TileView(COLOR_GRAY, new KnightView(Team.WHITE)), 0, 6);
         addTile(new TileView(COLOR_WHITE, new RookView(Team.WHITE)), 0, 7);
         for (int j = 0; j < 8; ++j)
-            addTile(new TileView((j % 2 == 0 ? COLOR_WHITE : COLOR_BLACK), new PawnView(Team.WHITE)), 1, j);
+            addTile(new TileView((j % 2 == 0 ? COLOR_WHITE : COLOR_GRAY), new PawnView(Team.WHITE)), 1, j);
 
         for (int i = 2; i < 6; ++i) {
             for (int j = 0; j < 8; ++j)
-                addTile(new TileView(((i + j) % 2 == 0? COLOR_BLACK : COLOR_WHITE), null), i, j);
+                addTile(new TileView(((i + j) % 2 == 0? COLOR_GRAY : COLOR_WHITE), null), i, j);
         }
 
         for (int j = 0; j < 8; ++j)
-            addTile(new TileView((j % 2 == 0 ? COLOR_BLACK : COLOR_WHITE), new PawnView(Team.BLACK)), 6, j);
+            addTile(new TileView((j % 2 == 0 ? COLOR_GRAY : COLOR_WHITE), new PawnView(Team.BLACK)), 6, j);
         addTile(new TileView(COLOR_WHITE, new RookView(Team.BLACK)), 7, 0);
-        addTile(new TileView(COLOR_BLACK, new KnightView(Team.BLACK)), 7, 1);
+        addTile(new TileView(COLOR_GRAY, new KnightView(Team.BLACK)), 7, 1);
         addTile(new TileView(COLOR_WHITE, new BishopView(Team.BLACK)), 7, 2);
-        addTile(new TileView(COLOR_BLACK, new QueenView(Team.BLACK)), 7, 3);
+        addTile(new TileView(COLOR_GRAY, new QueenView(Team.BLACK)), 7, 3);
         addTile(new TileView(COLOR_WHITE, new KingView(Team.BLACK)), 7, 4);
-        addTile(new TileView(COLOR_BLACK, new BishopView(Team.BLACK)), 7, 5);
+        addTile(new TileView(COLOR_GRAY, new BishopView(Team.BLACK)), 7, 5);
         addTile(new TileView(COLOR_WHITE, new KnightView(Team.BLACK)), 7, 6);
-        addTile(new TileView(COLOR_BLACK, new RookView(Team.BLACK)), 7, 7);
+        addTile(new TileView(COLOR_GRAY, new RookView(Team.BLACK)), 7, 7);
     }
 
     public void resetPieces() {
