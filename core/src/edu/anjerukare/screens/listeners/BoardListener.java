@@ -13,14 +13,12 @@ import edu.anjerukare.screens.models.pieces.Pawn;
 import edu.anjerukare.screens.models.pieces.Rook;
 import edu.anjerukare.screens.utils.Point;
 import edu.anjerukare.screens.views.*;
-import edu.anjerukare.screens.views.VictoryView.GameResult;
 import edu.anjerukare.screens.views.pieces.KingView;
 import edu.anjerukare.screens.views.pieces.PawnView;
 import edu.anjerukare.screens.views.pieces.RookView;
 
 import java.util.List;
 
-import static com.badlogic.gdx.scenes.scene2d.Touchable.disabled;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.delay;
 import static edu.anjerukare.Assets.*;
 import static edu.anjerukare.screens.enums.PieceType.KING;
@@ -39,8 +37,11 @@ public class BoardListener extends ClickListener {
     protected final PawnPromotingView pawnPromotingView;
     protected final VictoryView victoryView;
 
+    private final VictoryListener victoryListener;
+
     public BoardListener(Board board, BoardView boardView, PawnPromotingView pawnPromotingView,
-                         VictoryView victoryView) {
+                         VictoryView victoryView, VictoryListener victoryListener) {
+        this.victoryListener = victoryListener;
         game = (Chess) Gdx.app.getApplicationListener();
 
         this.board = board;
@@ -94,8 +95,7 @@ public class BoardListener extends ClickListener {
                 updateCheckState();
 
                 if (piece.type == PAWN && (tilePos.y == 0 || tilePos.y == 7)) {
-                    boardView.overlapped = true;
-                    boardView.setTouchable(disabled);
+                    boardView.setOverlapped(true);
 
                     pawnPromotingView.setPawn((PawnView) boardView.selectedPiece);
                     showPromotingPopup(tile.getX(), tile.getY());
@@ -106,9 +106,9 @@ public class BoardListener extends ClickListener {
                 updateCheckState();
                 if (board.hasCurrentPlayerNoMoves()) {
                     if (board.isCheck())
-                        showVictoryOverlay(CHECKMATE);
+                        victoryListener.showViewWith(CHECKMATE);
                     else
-                        showVictoryOverlay(STALEMATE);
+                        victoryListener.showViewWith(STALEMATE);
                 }
                 break;
             }
@@ -127,8 +127,7 @@ public class BoardListener extends ClickListener {
                 updateCheckState();
 
                 if (piece.type == PAWN && (tilePos.y == 0 || tilePos.y == 7)) {
-                    boardView.overlapped = true;
-                    boardView.setTouchable(disabled);
+                    boardView.setOverlapped(true);
 
                     pawnPromotingView.setPawn((PawnView) boardView.selectedPiece);
                     showPromotingPopup(tile.getX(), tile.getY());
@@ -139,9 +138,9 @@ public class BoardListener extends ClickListener {
                 updateCheckState();
                 if (board.hasCurrentPlayerNoMoves()) {
                     if (board.isCheck())
-                        showVictoryOverlay(CHECKMATE);
+                        victoryListener.showViewWith(CHECKMATE);
                     else
-                        showVictoryOverlay(STALEMATE);
+                        victoryListener.showViewWith(STALEMATE);
                 }
                 break;
             }
@@ -158,9 +157,9 @@ public class BoardListener extends ClickListener {
                 updateCheckState();
                 if (board.hasCurrentPlayerNoMoves()) {
                     if (board.isCheck())
-                        showVictoryOverlay(CHECKMATE);
+                        victoryListener.showViewWith(CHECKMATE);
                     else
-                        showVictoryOverlay(STALEMATE);
+                        victoryListener.showViewWith(STALEMATE);
                 }
                 break;
             }
@@ -182,9 +181,9 @@ public class BoardListener extends ClickListener {
                 updateCheckState();
                 if (board.hasCurrentPlayerNoMoves()) {
                     if (board.isCheck())
-                        showVictoryOverlay(CHECKMATE);
+                        victoryListener.showViewWith(CHECKMATE);
                     else
-                        showVictoryOverlay(STALEMATE);
+                        victoryListener.showViewWith(STALEMATE);
                 }
                 break;
             }
@@ -208,14 +207,5 @@ public class BoardListener extends ClickListener {
         } else {
             kingView.checked = false;
         }
-    }
-
-    public void showVictoryOverlay(GameResult gameResult) {
-        boardView.overlapped = true;
-        boardView.setTouchable(disabled);
-        victoryView.result = gameResult;
-        if (gameResult == CHECKMATE)
-            victoryView.team = board.getOtherPlayerTeam();
-        victoryView.show();
     }
 }

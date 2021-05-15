@@ -26,7 +26,7 @@ public class BoardView extends Group {
     public PieceView selectedPiece = null;
 
     private final static ShapeRenderer renderer = new ShapeRenderer();
-    public boolean overlapped;
+    private boolean overlapped;
 
     public BoardView() {
         setSize(352, 352);
@@ -109,25 +109,42 @@ public class BoardView extends Group {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
+        batch.end();
+        drawBorder(batch);
+        batch.begin();
+
         super.draw(batch, parentAlpha);
 
         if (overlapped) {
             batch.end();
-
-            renderer.setProjectionMatrix(batch.getProjectionMatrix());
-            renderer.setTransformMatrix(batch.getTransformMatrix());
-            // renderer.translate(getX(), getY(), 0);
-
-            Gdx.gl.glEnable(GL20.GL_BLEND);
-            Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-            renderer.begin(ShapeRenderer.ShapeType.Filled);
-            renderer.setColor(0, 0, 0, .5f);
-            renderer.rect(getX(), getY(), getWidth(), getHeight());
-            renderer.end();
-            Gdx.gl.glDisable(GL20.GL_BLEND);
-
+            drawOverlap(batch);
             batch.begin();
         }
+    }
+
+    private void drawBorder(Batch batch) {
+        renderer.setProjectionMatrix(batch.getProjectionMatrix());
+        renderer.setTransformMatrix(batch.getTransformMatrix());
+        renderer.begin(ShapeRenderer.ShapeType.Filled);
+        renderer.setColor(COLOR_WHITE);
+
+        renderer.rect(getX() - 4, getY() - 4, getWidth() + 8, getHeight() + 8);
+
+        renderer.end();
+    }
+
+    private void drawOverlap(Batch batch) {
+        renderer.setProjectionMatrix(batch.getProjectionMatrix());
+        renderer.setTransformMatrix(batch.getTransformMatrix());
+        Gdx.gl.glEnable(GL20.GL_BLEND);
+        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+        renderer.begin(ShapeRenderer.ShapeType.Filled);
+        renderer.setColor(0, 0, 0, .5f);
+
+        renderer.rect(getX() - 4, getY() - 4, getWidth() + 8, getHeight() + 8);
+
+        renderer.end();
+        Gdx.gl.glDisable(GL20.GL_BLEND);
     }
 
     public void resetTileStates() {
@@ -234,5 +251,15 @@ public class BoardView extends Group {
         movePiece(king, kingPosition);
         rookPosition.x = kingPosition.x - direction;
         movePiece(rook, rookPosition);
+    }
+
+    public void setOverlapped(boolean overlapped) {
+        if (overlapped) {
+            this.overlapped = true;
+            setTouchable(disabled);
+        } else {
+            this.overlapped = false;
+            setTouchable(childrenOnly);
+        }
     }
 }
