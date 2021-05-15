@@ -12,23 +12,25 @@ import edu.anjerukare.screens.views.pieces.KnightView;
 import edu.anjerukare.screens.views.pieces.QueenView;
 import edu.anjerukare.screens.views.pieces.RookView;
 
-import static com.badlogic.gdx.scenes.scene2d.Touchable.childrenOnly;
 import static edu.anjerukare.screens.views.VictoryView.GameResult.CHECKMATE;
 import static edu.anjerukare.screens.views.VictoryView.GameResult.STALEMATE;
 
 public class PawnPromotingListener extends ClickListener {
 
-    private final BoardListener boardListener;
-
     private final Board board;
     private final BoardView boardView;
     private final PawnPromotingView pawnPromotingView;
 
-    public PawnPromotingListener(BoardListener boardListener, Board board, BoardView boardView, PawnPromotingView pawnPromotingView) {
-        this.boardListener = boardListener;
+    private final BoardListener boardListener;
+    private final VictoryListener victoryListener;
+
+    public PawnPromotingListener(Board board, BoardView boardView, PawnPromotingView pawnPromotingView,
+                                 BoardListener boardListener, VictoryListener victoryListener) {
         this.board = board;
         this.boardView = boardView;
         this.pawnPromotingView = pawnPromotingView;
+        this.boardListener = boardListener;
+        this.victoryListener = victoryListener;
     }
 
     @Override
@@ -55,15 +57,14 @@ public class PawnPromotingListener extends ClickListener {
         board.promotePawn((Pawn) piece, pieceView.type);
 
         pawnPromotingView.setVisible(false);
-        boardView.overlapped = false;
-        boardView.setTouchable(childrenOnly);
+        boardView.setOverlapped(false);
         board.passTurnToNextPlayer();
         boardListener.updateCheckState();
         if (board.hasCurrentPlayerNoMoves()) {
             if (board.isCheck())
-                boardListener.showVictoryOverlay(CHECKMATE);
+                victoryListener.showViewWith(CHECKMATE);
             else
-                boardListener.showVictoryOverlay(STALEMATE);
+                victoryListener.showViewWith(STALEMATE);
         }
     }
 }

@@ -1,10 +1,8 @@
 package edu.anjerukare.screens.views;
 
-import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.Align;
 import com.rafaskoberg.gdx.typinglabel.TypingLabel;
 import edu.anjerukare.Assets;
 import edu.anjerukare.screens.enums.Team;

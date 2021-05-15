@@ -40,7 +40,6 @@ public class TileView extends Actor {
 
         renderer.setProjectionMatrix(batch.getProjectionMatrix());
         renderer.setTransformMatrix(batch.getTransformMatrix());
-//        renderer.translate(getX(), getY(), 0);
 
         renderer.begin(ShapeRenderer.ShapeType.Filled);
         switch (state) {

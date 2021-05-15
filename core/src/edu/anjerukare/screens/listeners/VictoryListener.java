@@ -3,8 +3,9 @@ package edu.anjerukare.screens.listeners;
 import edu.anjerukare.screens.models.Board;
 import edu.anjerukare.screens.views.BoardView;
 import edu.anjerukare.screens.views.VictoryView;
+import edu.anjerukare.screens.views.VictoryView.GameResult;
 
-import static com.badlogic.gdx.scenes.scene2d.Touchable.childrenOnly;
+import static edu.anjerukare.screens.views.VictoryView.GameResult.CHECKMATE;
 
 public class VictoryListener extends AnyKeyListener {
 
@@ -24,7 +25,14 @@ public class VictoryListener extends AnyKeyListener {
         board.reset();
         boardView.resetPieces();
         victoryView.setVisible(false);
-        boardView.overlapped = false;
-        boardView.setTouchable(childrenOnly);
+        boardView.setOverlapped(false);
+    }
+
+    public void showViewWith(GameResult gameResult) {
+        boardView.setOverlapped(true);
+        victoryView.result = gameResult;
+        if (gameResult == CHECKMATE)
+            victoryView.team = board.getOtherPlayerTeam();
+        victoryView.show();
     }
 }
