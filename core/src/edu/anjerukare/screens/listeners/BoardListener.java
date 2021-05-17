@@ -54,6 +54,7 @@ public class BoardListener extends ClickListener {
     public void clicked(InputEvent event, float x, float y) {
         TileView tile = (TileView) event.getTarget();
         Point tilePos = boardView.getPointForTile(tile);
+        Point point = boardView.getPointForPiece(boardView.selectedPiece);
 
         switch (tile.state) {
             case DEFAULT: {
@@ -86,7 +87,6 @@ public class BoardListener extends ClickListener {
             case MOVEAVAILABLE: {
                 boardView.resetTileStates();
 
-                Point point = boardView.getPointForPiece(boardView.selectedPiece);
                 boardView.movePiece(boardView.selectedPiece, tilePos);
                 Piece piece = board.getPieceAt(point);
                 board.move(piece, tilePos);
@@ -115,7 +115,6 @@ public class BoardListener extends ClickListener {
             case CAPTUREAVAILABLE: {
                 boardView.resetTileStates();
 
-                Point point = boardView.getPointForPiece(boardView.selectedPiece);
                 PieceView targetPiece = boardView.getPieceAt(tilePos);
                 boardView.removePiece(targetPiece);
                 boardView.movePiece(boardView.selectedPiece, tilePos);
@@ -166,7 +165,6 @@ public class BoardListener extends ClickListener {
             case ENPASSANTAVAILABLE: {
                 boardView.resetTileStates();
 
-                Point point = boardView.getPointForPiece(boardView.selectedPiece);
                 int forwardDirection = board.currentPlayer.forward;
                 Point enPassantTarget = new Point(tilePos.x, tilePos.y - forwardDirection);
                 boardView.removePiece(boardView.getPieceAt(enPassantTarget));
