@@ -1,0 +1,38 @@
+
+skin.png
+size: 128,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+button_down
+  rotate: false
+  xy: 1, 1
+  size: 36, 40
+  split: 0, 0, 4, 0
+  pad: 0, 0, 0, 0
+  orig: 36, 40
+  offset: 0, 0
+  index: -1
+button_up
+  rotate: false
+  xy: 1, 81
+  size: 36, 40
+  split: 0, 0, 0, 5
+  pad: 0, 0, 0, 0
+  orig: 36, 40
+  offset: 0, 0
+  index: -1
+draw
+  rotate: false
+  xy: 39, 85
+  size: 36, 36
+  orig: 36, 36
+  offset: 0, 0
+  index: -1
+surrender
+  rotate: false
+  xy: 1, 43
+  size: 36, 36
+  orig: 36, 36
+  offset: 0, 0
+  index: -1

@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
 import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
 import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader.FreeTypeFontLoaderParameter;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 /* Static assets it's a bad thing to do
 *  but I think then your target platform
@@ -50,6 +51,9 @@ public class Assets {
     public final static Color COLOR_LIGHT_PURPLE = new Color(COLOR_WHITE).lerp(Color.valueOf("9b59b6"), .4f);
     public final static Color COLOR_DARK_PURPLE = new Color(COLOR_GRAY).lerp(Color.valueOf("9b59b6"), .4f);
 
+    public final static AssetDescriptor<Skin> skin =
+            new AssetDescriptor<>("skin.json", Skin.class);
+
     public static void load() {
         manager.load(piecesAtlas);
 
@@ -71,6 +75,7 @@ public class Assets {
         manager.load(pieceMoveSound);
         manager.load(pieceCaptureSound);
         manager.load(checkSound);
+        manager.load(skin);
     }
 
     public static void finishLoading() {
