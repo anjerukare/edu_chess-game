@@ -36,11 +36,12 @@ public class BoardListener extends ClickListener {
     protected final BoardView boardView;
     protected final PawnPromotingView pawnPromotingView;
     protected final VictoryView victoryView;
+    protected final GameInfoView gameInfoView;
 
     private final VictoryListener victoryListener;
 
     public BoardListener(Board board, BoardView boardView, PawnPromotingView pawnPromotingView,
-                         VictoryView victoryView, VictoryListener victoryListener) {
+                         VictoryView victoryView, GameInfoView gameInfoView, VictoryListener victoryListener) {
         this.victoryListener = victoryListener;
         game = (Chess) Gdx.app.getApplicationListener();
 
@@ -48,6 +49,7 @@ public class BoardListener extends ClickListener {
         this.boardView = boardView;
         this.pawnPromotingView = pawnPromotingView;
         this.victoryView = victoryView;
+        this.gameInfoView = gameInfoView;
     }
 
     @Override
@@ -100,7 +102,7 @@ public class BoardListener extends ClickListener {
                     pawnPromotingView.setPawn((PawnView) boardView.selectedPiece);
                     showPromotingPopup(tile.getX(), tile.getY());
                 } else {
-                    board.passTurnToNextPlayer();
+                    turnIsDone();
                 }
 
                 updateCheckState();
@@ -131,7 +133,7 @@ public class BoardListener extends ClickListener {
                     pawnPromotingView.setPawn((PawnView) boardView.selectedPiece);
                     showPromotingPopup(tile.getX(), tile.getY());
                 } else {
-                    board.passTurnToNextPlayer();
+                    turnIsDone();
                 }
 
                 updateCheckState();
@@ -152,7 +154,7 @@ public class BoardListener extends ClickListener {
                 board.castle((King) board.getPieceAt(kingPosition), (Rook) board.getPieceAt(tilePos));
                 Assets.get(pieceMoveSound).play(0.4f);
 
-                board.passTurnToNextPlayer();
+                turnIsDone();
                 updateCheckState();
                 if (board.hasCurrentPlayerNoMoves()) {
                     if (board.isCheck())
@@ -175,7 +177,7 @@ public class BoardListener extends ClickListener {
 
                 updateCheckState();
 
-                board.passTurnToNextPlayer();
+                turnIsDone();
                 updateCheckState();
                 if (board.hasCurrentPlayerNoMoves()) {
                     if (board.isCheck())
@@ -205,5 +207,13 @@ public class BoardListener extends ClickListener {
         } else {
             kingView.checked = false;
         }
+    }
+
+    private void turnIsDone() {
+        board.passTurnToNextPlayer();
+        if (board.getCurrentPlayerTeam() == WHITE)
+            gameInfoView.setLabelText("Ход белых");
+        else
+            gameInfoView.setLabelText("Ход чёрных");
     }
 }

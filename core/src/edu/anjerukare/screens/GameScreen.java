@@ -6,15 +6,15 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import edu.anjerukare.Assets;
 import edu.anjerukare.Chess;
-import edu.anjerukare.screens.listeners.BoardListener;
-import edu.anjerukare.screens.listeners.PawnPromotingListener;
-import edu.anjerukare.screens.listeners.VictoryListener;
+import edu.anjerukare.screens.listeners.*;
 import edu.anjerukare.screens.models.Board;
 import edu.anjerukare.screens.utils.ManagedScreenAdapter;
 import edu.anjerukare.screens.views.BoardView;
+import edu.anjerukare.screens.views.GameInfoView;
 import edu.anjerukare.screens.views.PawnPromotingView;
 import edu.anjerukare.screens.views.VictoryView;
 
@@ -36,30 +36,31 @@ public class GameScreen extends ManagedScreenAdapter {
 
         Board board = new Board();
         BoardView boardView = new BoardView();
-//        boardView.setPosition(stage.getWidth() / 2, stage.getHeight() / 2, Align.center);
         PawnPromotingView pawnPromotingView = new PawnPromotingView();
         pawnPromotingView.setPosition((stage.getWidth() - boardView.getWidth()) / 2,
                 (stage.getHeight() - boardView.getHeight()) / 2);
         VictoryView victoryView = new VictoryView();
         VictoryListener victoryListener = new VictoryListener(victoryView, board, boardView);
+        GameInfoView gameInfoView = new GameInfoView();
+        gameInfoView.getSurrenderButton().addListener(new SurrenderListener());
+        gameInfoView.getDrawButton().addListener(new DrawListener());
 
         BoardListener boardListener = new BoardListener(board, boardView, pawnPromotingView,
-                victoryView, victoryListener);
+                victoryView, gameInfoView, victoryListener);
         boardView.addListener(boardListener);
         pawnPromotingView.addListener(new PawnPromotingListener(board, boardView, pawnPromotingView, boardListener, victoryListener));
         victoryView.addListener(victoryListener);
 
         root.setFillParent(true);
         root.padTop(44).padRight(44);
-        initLabels(boardView);
+        initializeTable(boardView, gameInfoView);
 
-//        stage.addActor(boardView);
         stage.addActor(root);
         stage.addActor(pawnPromotingView);
         stage.addActor(victoryView);
     }
 
-    private void initLabels(BoardView boardView) {
+    private void initializeTable(BoardView boardView, GameInfoView gameInfoView) {
         LabelStyle labelStyle = new LabelStyle(Assets.get(bigFont), COLOR_LIGHT_WHITE);
 
         Table digits = new Table();
@@ -72,6 +73,7 @@ public class GameScreen extends ManagedScreenAdapter {
         root.add(digits);
 
         root.add(boardView).prefSize(boardView.getWidth(), boardView.getHeight());
+        root.add(gameInfoView).padLeft(64);
 
         root.row();
         root.add();
