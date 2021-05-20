@@ -6,17 +6,19 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import edu.anjerukare.Assets;
 import edu.anjerukare.Chess;
-import edu.anjerukare.screens.listeners.*;
+import edu.anjerukare.screens.listeners.BoardListener;
+import edu.anjerukare.screens.listeners.GameInfoListener;
+import edu.anjerukare.screens.listeners.GameOverListener;
+import edu.anjerukare.screens.listeners.PawnPromotingListener;
 import edu.anjerukare.screens.models.Board;
 import edu.anjerukare.screens.utils.ManagedScreenAdapter;
 import edu.anjerukare.screens.views.BoardView;
 import edu.anjerukare.screens.views.GameInfoView;
+import edu.anjerukare.screens.views.GameOverView;
 import edu.anjerukare.screens.views.PawnPromotingView;
-import edu.anjerukare.screens.views.VictoryView;
 
 import static com.badlogic.gdx.utils.Align.center;
 import static edu.anjerukare.Assets.*;
@@ -39,17 +41,18 @@ public class GameScreen extends ManagedScreenAdapter {
         PawnPromotingView pawnPromotingView = new PawnPromotingView();
         pawnPromotingView.setPosition((stage.getWidth() - boardView.getWidth()) / 2,
                 (stage.getHeight() - boardView.getHeight()) / 2);
-        VictoryView victoryView = new VictoryView();
-        VictoryListener victoryListener = new VictoryListener(victoryView, board, boardView);
         GameInfoView gameInfoView = new GameInfoView();
-        gameInfoView.getSurrenderButton().addListener(new SurrenderListener());
-        gameInfoView.getDrawButton().addListener(new DrawListener());
+        gameInfoView.addListener(new GameInfoListener(gameInfoView));
+        GameOverView gameOverView = new GameOverView();
+        GameOverListener gameOverListener = new GameOverListener(gameOverView, board, boardView,
+                gameInfoView);
 
         BoardListener boardListener = new BoardListener(board, boardView, pawnPromotingView,
-                victoryView, gameInfoView, victoryListener);
+                gameOverView, gameInfoView, gameOverListener);
         boardView.addListener(boardListener);
-        pawnPromotingView.addListener(new PawnPromotingListener(board, boardView, pawnPromotingView, boardListener, victoryListener));
-        victoryView.addListener(victoryListener);
+        pawnPromotingView.addListener(new PawnPromotingListener(board, boardView, pawnPromotingView,
+                boardListener, gameOverListener));
+        gameOverView.addListener(gameOverListener);
 
         root.setFillParent(true);
         root.padTop(44).padRight(44);
@@ -57,7 +60,7 @@ public class GameScreen extends ManagedScreenAdapter {
 
         stage.addActor(root);
         stage.addActor(pawnPromotingView);
-        stage.addActor(victoryView);
+        stage.addActor(gameOverView);
     }
 
     private void initializeTable(BoardView boardView, GameInfoView gameInfoView) {
@@ -73,7 +76,7 @@ public class GameScreen extends ManagedScreenAdapter {
         root.add(digits);
 
         root.add(boardView).prefSize(boardView.getWidth(), boardView.getHeight());
-        root.add(gameInfoView).padLeft(64);
+        root.add(gameInfoView).padLeft(64).prefWidth(240);
 
         root.row();
         root.add();

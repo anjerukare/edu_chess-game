@@ -12,8 +12,8 @@ import edu.anjerukare.screens.views.pieces.KnightView;
 import edu.anjerukare.screens.views.pieces.QueenView;
 import edu.anjerukare.screens.views.pieces.RookView;
 
-import static edu.anjerukare.screens.views.VictoryView.GameResult.CHECKMATE;
-import static edu.anjerukare.screens.views.VictoryView.GameResult.STALEMATE;
+import static edu.anjerukare.screens.views.GameOverView.GameResult.CHECKMATE;
+import static edu.anjerukare.screens.views.GameOverView.GameResult.STALEMATE;
 
 public class PawnPromotingListener extends ClickListener {
 
@@ -22,15 +22,15 @@ public class PawnPromotingListener extends ClickListener {
     private final PawnPromotingView pawnPromotingView;
 
     private final BoardListener boardListener;
-    private final VictoryListener victoryListener;
+    private final GameOverListener gameOverListener;
 
     public PawnPromotingListener(Board board, BoardView boardView, PawnPromotingView pawnPromotingView,
-                                 BoardListener boardListener, VictoryListener victoryListener) {
+                                 BoardListener boardListener, GameOverListener gameOverListener) {
         this.board = board;
         this.boardView = boardView;
         this.pawnPromotingView = pawnPromotingView;
         this.boardListener = boardListener;
-        this.victoryListener = victoryListener;
+        this.gameOverListener = gameOverListener;
     }
 
     @Override
@@ -62,9 +62,9 @@ public class PawnPromotingListener extends ClickListener {
         boardListener.updateCheckState();
         if (board.hasCurrentPlayerNoMoves()) {
             if (board.isCheck())
-                victoryListener.showViewWith(CHECKMATE);
+                gameOverListener.showViewWith(CHECKMATE);
             else
-                victoryListener.showViewWith(STALEMATE);
+                gameOverListener.showViewWith(STALEMATE);
         }
     }
 }

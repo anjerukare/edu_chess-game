@@ -24,9 +24,11 @@ import static edu.anjerukare.Assets.*;
 import static edu.anjerukare.screens.enums.PieceType.KING;
 import static edu.anjerukare.screens.enums.Team.WHITE;
 import static edu.anjerukare.screens.enums.PieceType.PAWN;
+import static edu.anjerukare.screens.views.GameInfoView.BLACK_MOVE;
+import static edu.anjerukare.screens.views.GameInfoView.WHITE_MOVE;
 import static edu.anjerukare.screens.views.TileView.State.SELECTED;
-import static edu.anjerukare.screens.views.VictoryView.GameResult.CHECKMATE;
-import static edu.anjerukare.screens.views.VictoryView.GameResult.STALEMATE;
+import static edu.anjerukare.screens.views.GameOverView.GameResult.CHECKMATE;
+import static edu.anjerukare.screens.views.GameOverView.GameResult.STALEMATE;
 
 public class BoardListener extends ClickListener {
 
@@ -35,20 +37,20 @@ public class BoardListener extends ClickListener {
     protected final Board board;
     protected final BoardView boardView;
     protected final PawnPromotingView pawnPromotingView;
-    protected final VictoryView victoryView;
+    protected final GameOverView gameOverView;
     protected final GameInfoView gameInfoView;
 
-    private final VictoryListener victoryListener;
+    private final GameOverListener gameOverListener;
 
     public BoardListener(Board board, BoardView boardView, PawnPromotingView pawnPromotingView,
-                         VictoryView victoryView, GameInfoView gameInfoView, VictoryListener victoryListener) {
-        this.victoryListener = victoryListener;
+                         GameOverView gameOverView, GameInfoView gameInfoView, GameOverListener gameOverListener) {
+        this.gameOverListener = gameOverListener;
         game = (Chess) Gdx.app.getApplicationListener();
 
         this.board = board;
         this.boardView = boardView;
         this.pawnPromotingView = pawnPromotingView;
-        this.victoryView = victoryView;
+        this.gameOverView = gameOverView;
         this.gameInfoView = gameInfoView;
     }
 
@@ -107,10 +109,7 @@ public class BoardListener extends ClickListener {
 
                 updateCheckState();
                 if (board.hasCurrentPlayerNoMoves()) {
-                    if (board.isCheck())
-                        victoryListener.showViewWith(CHECKMATE);
-                    else
-                        victoryListener.showViewWith(STALEMATE);
+                    gameIsOver();
                 }
                 break;
             }
@@ -138,10 +137,7 @@ public class BoardListener extends ClickListener {
 
                 updateCheckState();
                 if (board.hasCurrentPlayerNoMoves()) {
-                    if (board.isCheck())
-                        victoryListener.showViewWith(CHECKMATE);
-                    else
-                        victoryListener.showViewWith(STALEMATE);
+                    gameIsOver();
                 }
                 break;
             }
@@ -157,10 +153,7 @@ public class BoardListener extends ClickListener {
                 turnIsDone();
                 updateCheckState();
                 if (board.hasCurrentPlayerNoMoves()) {
-                    if (board.isCheck())
-                        victoryListener.showViewWith(CHECKMATE);
-                    else
-                        victoryListener.showViewWith(STALEMATE);
+                    gameIsOver();
                 }
                 break;
             }
@@ -180,10 +173,7 @@ public class BoardListener extends ClickListener {
                 turnIsDone();
                 updateCheckState();
                 if (board.hasCurrentPlayerNoMoves()) {
-                    if (board.isCheck())
-                        victoryListener.showViewWith(CHECKMATE);
-                    else
-                        victoryListener.showViewWith(STALEMATE);
+                    gameIsOver();
                 }
                 break;
             }
@@ -212,8 +202,15 @@ public class BoardListener extends ClickListener {
     private void turnIsDone() {
         board.passTurnToNextPlayer();
         if (board.getCurrentPlayerTeam() == WHITE)
-            gameInfoView.setLabelText("Ход белых");
+            gameInfoView.setLabelText(WHITE_MOVE);
         else
-            gameInfoView.setLabelText("Ход чёрных");
+            gameInfoView.setLabelText(BLACK_MOVE);
+    }
+
+    private void gameIsOver() {
+        if (board.isCheck())
+            gameOverListener.showViewWith(CHECKMATE);
+        else
+            gameOverListener.showViewWith(STALEMATE);
     }
 }

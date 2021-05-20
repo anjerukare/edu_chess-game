@@ -11,14 +11,14 @@ import static com.badlogic.gdx.scenes.scene2d.Touchable.enabled;
 import static com.badlogic.gdx.utils.Align.bottom;
 import static edu.anjerukare.Assets.*;
 
-public class VictoryView extends Table {
+public class GameOverView extends Table {
 
     public enum GameResult { CHECKMATE, STALEMATE }
 
     public GameResult result;
     public Team team;
 
-    public VictoryView() {
+    public GameOverView() {
         super();
         setFillParent(true);
         setVisible(false);
@@ -33,16 +33,16 @@ public class VictoryView extends Table {
         switch (result) {
             case CHECKMATE:
                 if (team == Team.WHITE) {
-                    headerText = "Победили белые!";
-                    descriptionText = "Королю чёрных был поставлен мат";
+                    headerText = "Победа белых!";
+                    descriptionText = "Чёрным был поставлен мат";
                 } else {
-                    headerText = "Победили чёрные!";
-                    descriptionText = "Королю белых был поставлен мат";
+                    headerText = "Победа чёрных!";
+                    descriptionText = "Белым был поставлен мат";
                 }
                 break;
             case STALEMATE:
                 headerText = "Объявлена ничья";
-                descriptionText = "Текущий игрок не имеет ходов";
+                descriptionText = "Партия закончилась патом";
                 break;
         }
 
