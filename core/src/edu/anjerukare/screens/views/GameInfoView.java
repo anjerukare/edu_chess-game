@@ -1,12 +1,11 @@
 package edu.anjerukare.screens.views;
 
-import com.badlogic.gdx.graphics.g2d.NinePatch;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import edu.anjerukare.Assets;
 import edu.anjerukare.screens.utils.JumpingButton;
 
+import static com.badlogic.gdx.scenes.scene2d.Touchable.disabled;
 import static edu.anjerukare.Assets.skin;
 
 public class GameInfoView extends SideMenuView {
@@ -14,22 +13,21 @@ public class GameInfoView extends SideMenuView {
     private final Button surrenderButton;
     private final Button drawButton;
 
+    public final static String WHITE_MOVE = "Ходят белые";
+    public final static String BLACK_MOVE = "Ходят чёрные";
+
     public GameInfoView() {
-        NinePatch surrender = Assets.get(skin).getPatch("surrender");
-        surrenderButton = new JumpingButton(new Image(surrender), Assets.get(skin));
+        Image surrender = new Image(Assets.get(skin).getPatch("surrender"));
+        surrender.setTouchable(disabled);
+        surrenderButton = new JumpingButton(surrender, Assets.get(skin));
+        surrenderButton.setName("surrender");
         buttons.add(surrenderButton);
-        NinePatch draw = Assets.get(skin).getPatch("draw");
-        drawButton = new JumpingButton(new Image(draw), Assets.get(skin));
+        Image draw = new Image(Assets.get(skin).getPatch("draw"));
+        draw.setTouchable(disabled);
+        drawButton = new JumpingButton(draw, Assets.get(skin));
+        drawButton.setName("draw");
         buttons.add(drawButton);
 
-        initialize("Ход белых");
-    }
-
-    public Button getSurrenderButton() {
-        return surrenderButton;
-    }
-
-    public Button getDrawButton() {
-        return drawButton;
+        initialize("Об игре" , WHITE_MOVE);
     }
 }
