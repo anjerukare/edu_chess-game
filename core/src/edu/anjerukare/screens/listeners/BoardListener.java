@@ -1,10 +1,7 @@
 package edu.anjerukare.screens.listeners;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import edu.anjerukare.Assets;
@@ -23,16 +20,15 @@ import edu.anjerukare.screens.views.pieces.RookView;
 
 import java.util.List;
 
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.delay;
 import static edu.anjerukare.Assets.*;
 import static edu.anjerukare.screens.enums.PieceType.KING;
-import static edu.anjerukare.screens.enums.Team.WHITE;
 import static edu.anjerukare.screens.enums.PieceType.PAWN;
+import static edu.anjerukare.screens.enums.Team.WHITE;
 import static edu.anjerukare.screens.views.GameInfoView.BLACK_MOVE;
 import static edu.anjerukare.screens.views.GameInfoView.WHITE_MOVE;
-import static edu.anjerukare.screens.views.TileView.State.SELECTED;
 import static edu.anjerukare.screens.views.GameOverView.GameResult.CHECKMATE;
 import static edu.anjerukare.screens.views.GameOverView.GameResult.STALEMATE;
+import static edu.anjerukare.screens.views.TileView.State.SELECTED;
 
 public class BoardListener extends ClickListener {
 

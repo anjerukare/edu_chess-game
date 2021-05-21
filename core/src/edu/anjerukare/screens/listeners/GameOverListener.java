@@ -5,12 +5,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import edu.anjerukare.screens.models.Board;
 import edu.anjerukare.screens.utils.SideMenuManager;
 import edu.anjerukare.screens.views.BoardView;
-import edu.anjerukare.screens.views.GameInfoView;
-import edu.anjerukare.screens.views.GameOverView;
-import edu.anjerukare.screens.views.GameOverView.GameResult;
 
 import static edu.anjerukare.screens.views.GameInfoView.WHITE_MOVE;
-import static edu.anjerukare.screens.views.GameOverView.GameResult.CHECKMATE;
 
 public class GameOverListener extends ClickListener {
 
