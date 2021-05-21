@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 import static edu.anjerukare.Assets.*;
-import static edu.anjerukare.screens.views.TileView.State.*;
+import static edu.anjerukare.screens.views.TileView.State.DEFAULT;
 
 public class TileView extends Actor {
 

@@ -3,18 +3,14 @@ package edu.anjerukare.screens.views;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.rafaskoberg.gdx.typinglabel.TypingLabel;
 import edu.anjerukare.Assets;
 import edu.anjerukare.screens.enums.Team;
 import edu.anjerukare.screens.utils.JumpingButton;
 
 import static com.badlogic.gdx.scenes.scene2d.Touchable.disabled;
-import static com.badlogic.gdx.scenes.scene2d.Touchable.enabled;
-import static com.badlogic.gdx.utils.Align.bottom;
 import static edu.anjerukare.Assets.*;
 import static edu.anjerukare.screens.enums.Team.WHITE;
-import static edu.anjerukare.screens.views.GameOverView.GameResult.*;
+import static edu.anjerukare.screens.views.GameOverView.GameResult.CHECKMATE;
 
 public class GameOverView extends SideMenuView {
 

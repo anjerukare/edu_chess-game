@@ -4,12 +4,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import edu.anjerukare.Assets;
-import edu.anjerukare.screens.enums.Team;
 import edu.anjerukare.screens.utils.JumpingButton;
 
 import static com.badlogic.gdx.scenes.scene2d.Touchable.disabled;
 import static edu.anjerukare.Assets.*;
-import static edu.anjerukare.screens.enums.Team.WHITE;
 
 public class DrawConfirmView extends SideMenuView {
 

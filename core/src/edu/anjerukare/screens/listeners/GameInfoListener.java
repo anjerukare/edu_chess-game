@@ -1,16 +1,13 @@
 package edu.anjerukare.screens.listeners;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import edu.anjerukare.screens.models.Board;
 import edu.anjerukare.screens.utils.SideMenuManager;
 import edu.anjerukare.screens.views.BoardView;
 import edu.anjerukare.screens.views.DrawConfirmView;
 import edu.anjerukare.screens.views.GameOverView;
-import edu.anjerukare.screens.views.PawnPromotingView;
 
-import static com.badlogic.gdx.scenes.scene2d.Touchable.disabled;
 import static edu.anjerukare.screens.enums.Team.WHITE;
 import static edu.anjerukare.screens.views.DrawConfirmView.ASK_BLACK;
 import static edu.anjerukare.screens.views.DrawConfirmView.ASK_WHITE;

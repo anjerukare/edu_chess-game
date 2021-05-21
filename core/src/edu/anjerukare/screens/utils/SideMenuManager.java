@@ -3,7 +3,6 @@ package edu.anjerukare.screens.utils;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import edu.anjerukare.screens.views.SideMenuView;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;

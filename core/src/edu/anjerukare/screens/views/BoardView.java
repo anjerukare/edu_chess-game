@@ -14,8 +14,9 @@ import java.util.List;
 import static com.badlogic.gdx.scenes.scene2d.Touchable.childrenOnly;
 import static com.badlogic.gdx.scenes.scene2d.Touchable.disabled;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
+import static edu.anjerukare.Assets.COLOR_GRAY;
+import static edu.anjerukare.Assets.COLOR_WHITE;
 import static edu.anjerukare.screens.views.TileView.State.*;
-import static edu.anjerukare.Assets.*;
 
 public class BoardView extends Group {
 
