@@ -18,7 +18,7 @@ import static edu.anjerukare.screens.views.GameOverView.GameResult.*;
 
 public class GameOverView extends SideMenuView {
 
-    public enum GameResult { CHECKMATE, STALEMATE, SURRENDER }
+    public enum GameResult { CHECKMATE, STALEMATE, SURRENDER, DRAW }
 
     private GameResult result = CHECKMATE;
     private Team team = WHITE;
@@ -68,6 +68,10 @@ public class GameOverView extends SideMenuView {
                     setHeaderText("Победа чёрных!");
                     setLabelText("Белые сдались");
                 }
+                break;
+            case DRAW:
+                setHeaderText("Объявлена ничья");
+                setLabelText("По решению игроков");
                 break;
         }
     }

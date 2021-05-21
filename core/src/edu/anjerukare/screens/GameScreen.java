@@ -10,10 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import edu.anjerukare.Assets;
 import edu.anjerukare.Chess;
-import edu.anjerukare.screens.listeners.BoardListener;
-import edu.anjerukare.screens.listeners.GameInfoListener;
-import edu.anjerukare.screens.listeners.GameOverListener;
-import edu.anjerukare.screens.listeners.PawnPromotingListener;
+import edu.anjerukare.screens.listeners.*;
 import edu.anjerukare.screens.models.Board;
 import edu.anjerukare.screens.utils.ManagedScreenAdapter;
 import edu.anjerukare.screens.utils.SideMenuManager;
@@ -38,6 +35,10 @@ public class GameScreen extends ManagedScreenAdapter {
         Board board = new Board();
         BoardView boardView = new BoardView();
 
+        PawnPromotingView pawnPromotingView = new PawnPromotingView();
+        pawnPromotingView.setPosition((stage.getWidth() - boardView.getWidth()) / 2,
+                (stage.getHeight() - boardView.getHeight()) / 2);
+
         SideMenuManager sideMenuManager = new SideMenuManager();
         GameInfoView gameInfoView = new GameInfoView();
         gameInfoView.addListener(new GameInfoListener(sideMenuManager, board, boardView));
@@ -46,10 +47,9 @@ public class GameScreen extends ManagedScreenAdapter {
         GameOverListener gameOverListener = new GameOverListener(sideMenuManager, board, boardView);
         gameOverView.addListener(gameOverListener);
         sideMenuManager.addView("gameOver", gameOverView);
-
-        PawnPromotingView pawnPromotingView = new PawnPromotingView();
-        pawnPromotingView.setPosition((stage.getWidth() - boardView.getWidth()) / 2,
-                (stage.getHeight() - boardView.getHeight()) / 2);
+        DrawConfirmView drawConfirmView = new DrawConfirmView();
+        drawConfirmView.addListener(new DrawConfirmListener(sideMenuManager, boardView));
+        sideMenuManager.addView("drawConfirm", drawConfirmView);
 
         BoardListener boardListener = new BoardListener(board, boardView, pawnPromotingView,
                 sideMenuManager);

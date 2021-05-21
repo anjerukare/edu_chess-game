@@ -13,6 +13,9 @@ import edu.anjerukare.screens.views.pieces.KnightView;
 import edu.anjerukare.screens.views.pieces.QueenView;
 import edu.anjerukare.screens.views.pieces.RookView;
 
+import static edu.anjerukare.screens.enums.Team.WHITE;
+import static edu.anjerukare.screens.views.GameInfoView.BLACK_MOVE;
+import static edu.anjerukare.screens.views.GameInfoView.WHITE_MOVE;
 import static edu.anjerukare.screens.views.GameOverView.GameResult.CHECKMATE;
 import static edu.anjerukare.screens.views.GameOverView.GameResult.STALEMATE;
 
@@ -60,6 +63,13 @@ public class PawnPromotingListener extends ClickListener {
         pawnPromotingView.setVisible(false);
         boardView.setOverlapped(false);
         board.passTurnToNextPlayer();
+        GameInfoView gameInfoView = sideMenuManager.getView("gameInfo");
+        if (board.getCurrentPlayerTeam() == WHITE)
+            gameInfoView.setLabelText(WHITE_MOVE);
+        else
+            gameInfoView.setLabelText(BLACK_MOVE);
+        gameInfoView.setButtonsDisabled(false);
+
         boardListener.updateCheckState();
         if (board.hasCurrentPlayerNoMoves()) {
             GameOverView gameOverView = sideMenuManager.getView("gameOver");

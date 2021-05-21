@@ -4,6 +4,15 @@ size: 128,128
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+button_disabled
+  rotate: false
+  xy: 39, 43
+  size: 36, 40
+  split: 0, 0, 0, 5
+  pad: 0, 0, 0, 0
+  orig: 36, 40
+  offset: 0, 0
+  index: -1
 button_down
   rotate: false
   xy: 1, 1

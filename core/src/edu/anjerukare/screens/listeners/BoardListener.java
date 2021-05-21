@@ -2,7 +2,9 @@ package edu.anjerukare.screens.listeners;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import edu.anjerukare.Assets;
@@ -183,6 +185,8 @@ public class BoardListener extends ClickListener {
         pawnPromotingView.setPosition(x + boardView.getX(),
                 y + boardView.getY() + (pawn.team == WHITE ? 44 : 0),
                 (pawn.team == WHITE ? Align.topLeft : Align.bottomLeft));
+        GameInfoView gameInfoView = sideMenuManager.getView("gameInfo");
+        gameInfoView.setButtonsDisabled(true);
         pawnPromotingView.setVisible(true);
     }
 
