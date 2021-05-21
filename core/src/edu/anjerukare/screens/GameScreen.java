@@ -3,6 +3,7 @@ package edu.anjerukare.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -15,10 +16,8 @@ import edu.anjerukare.screens.listeners.GameOverListener;
 import edu.anjerukare.screens.listeners.PawnPromotingListener;
 import edu.anjerukare.screens.models.Board;
 import edu.anjerukare.screens.utils.ManagedScreenAdapter;
-import edu.anjerukare.screens.views.BoardView;
-import edu.anjerukare.screens.views.GameInfoView;
-import edu.anjerukare.screens.views.GameOverView;
-import edu.anjerukare.screens.views.PawnPromotingView;
+import edu.anjerukare.screens.utils.SideMenuManager;
+import edu.anjerukare.screens.views.*;
 
 import static com.badlogic.gdx.utils.Align.center;
 import static edu.anjerukare.Assets.*;
@@ -38,32 +37,36 @@ public class GameScreen extends ManagedScreenAdapter {
 
         Board board = new Board();
         BoardView boardView = new BoardView();
+
+        SideMenuManager sideMenuManager = new SideMenuManager();
+        GameInfoView gameInfoView = new GameInfoView();
+        gameInfoView.addListener(new GameInfoListener(sideMenuManager, board, boardView));
+        sideMenuManager.addView("gameInfo", gameInfoView);
+        GameOverView gameOverView = new GameOverView();
+        GameOverListener gameOverListener = new GameOverListener(sideMenuManager, board, boardView);
+        gameOverView.addListener(gameOverListener);
+        sideMenuManager.addView("gameOver", gameOverView);
+
         PawnPromotingView pawnPromotingView = new PawnPromotingView();
         pawnPromotingView.setPosition((stage.getWidth() - boardView.getWidth()) / 2,
                 (stage.getHeight() - boardView.getHeight()) / 2);
-        GameInfoView gameInfoView = new GameInfoView();
-        gameInfoView.addListener(new GameInfoListener(gameInfoView));
-        GameOverView gameOverView = new GameOverView();
-        GameOverListener gameOverListener = new GameOverListener(gameOverView, board, boardView,
-                gameInfoView);
 
         BoardListener boardListener = new BoardListener(board, boardView, pawnPromotingView,
-                gameOverView, gameInfoView, gameOverListener);
+                sideMenuManager);
         boardView.addListener(boardListener);
         pawnPromotingView.addListener(new PawnPromotingListener(board, boardView, pawnPromotingView,
-                boardListener, gameOverListener));
-        gameOverView.addListener(gameOverListener);
+                boardListener, sideMenuManager));
 
         root.setFillParent(true);
-        root.padTop(44).padRight(44);
-        initializeTable(boardView, gameInfoView);
+        root.padTop(44);
+        initializeTable(boardView, sideMenuManager);
 
         stage.addActor(root);
         stage.addActor(pawnPromotingView);
         stage.addActor(gameOverView);
     }
 
-    private void initializeTable(BoardView boardView, GameInfoView gameInfoView) {
+    private void initializeTable(BoardView boardView, SideMenuManager sideMenuManager) {
         LabelStyle labelStyle = new LabelStyle(Assets.get(bigFont), COLOR_LIGHT_WHITE);
 
         Table digits = new Table();
@@ -76,7 +79,10 @@ public class GameScreen extends ManagedScreenAdapter {
         root.add(digits);
 
         root.add(boardView).prefSize(boardView.getWidth(), boardView.getHeight());
-        root.add(gameInfoView).padLeft(64).prefWidth(240);
+        GameInfoView gameInfoView = sideMenuManager.getView("gameInfo");
+        Cell<SideMenuView> sideMenuCell = root.add(gameInfoView);
+        sideMenuManager.setViewsCell(sideMenuCell);
+        sideMenuCell.padLeft(48).prefWidth(240);
 
         root.row();
         root.add();
