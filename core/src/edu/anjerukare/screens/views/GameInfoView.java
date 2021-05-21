@@ -1,11 +1,13 @@
 package edu.anjerukare.screens.views;
 
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import edu.anjerukare.Assets;
 import edu.anjerukare.screens.utils.JumpingButton;
 
 import static com.badlogic.gdx.scenes.scene2d.Touchable.disabled;
+import static com.badlogic.gdx.scenes.scene2d.Touchable.enabled;
 import static edu.anjerukare.Assets.skin;
 
 public class GameInfoView extends SideMenuView {
@@ -28,6 +30,18 @@ public class GameInfoView extends SideMenuView {
         drawButton.setName("draw");
         buttons.add(drawButton);
 
-        initialize("Об игре" , WHITE_MOVE);
+        initialize("Текущая партия" , WHITE_MOVE);
+    }
+
+    public void setButtonsDisabled(boolean disabled) {
+        surrenderButton.setDisabled(disabled);
+        drawButton.setDisabled(disabled);
+        if (disabled) {
+            surrenderButton.setTouchable(Touchable.disabled);
+            drawButton.setTouchable(Touchable.disabled);
+        } else {
+            surrenderButton.setTouchable(enabled);
+            drawButton.setTouchable(enabled);
+        }
     }
 }
