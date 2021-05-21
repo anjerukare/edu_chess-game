@@ -1,64 +1,74 @@
 package edu.anjerukare.screens.views;
 
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.rafaskoberg.gdx.typinglabel.TypingLabel;
 import edu.anjerukare.Assets;
 import edu.anjerukare.screens.enums.Team;
+import edu.anjerukare.screens.utils.JumpingButton;
 
+import static com.badlogic.gdx.scenes.scene2d.Touchable.disabled;
 import static com.badlogic.gdx.scenes.scene2d.Touchable.enabled;
 import static com.badlogic.gdx.utils.Align.bottom;
 import static edu.anjerukare.Assets.*;
+import static edu.anjerukare.screens.enums.Team.WHITE;
+import static edu.anjerukare.screens.views.GameOverView.GameResult.*;
 
-public class GameOverView extends Table {
+public class GameOverView extends SideMenuView {
 
-    public enum GameResult { CHECKMATE, STALEMATE }
+    public enum GameResult { CHECKMATE, STALEMATE, SURRENDER }
 
-    public GameResult result;
-    public Team team;
+    private GameResult result = CHECKMATE;
+    private Team team = WHITE;
 
     public GameOverView() {
-        super();
-        setFillParent(true);
-        setVisible(false);
-        setTouchable(enabled);
+        Label buttonLabel = new Label("Сыграть снова",
+                new LabelStyle(Assets.get(smallFont), COLOR_LIGHT_WHITE));
+        buttonLabel.setTouchable(disabled);
+        Button resetButton = new JumpingButton(buttonLabel, Assets.get(skin));
+        resetButton.padLeft(16).padRight(16);
+        resetButton.setName("reset");
+        buttons.add(resetButton);
+
+        initialize();
     }
 
-    public void show() {
-        clearChildren();
+    public void setResult(GameResult result) {
+        this.result = result;
+        updateLabels();
+    }
 
-        setVisible(true);
-        String headerText = "", descriptionText = "";
+    public void setTeam(Team team) {
+        this.team = team;
+        updateLabels();
+    }
+
+    private void updateLabels() {
         switch (result) {
             case CHECKMATE:
-                if (team == Team.WHITE) {
-                    headerText = "Победа белых!";
-                    descriptionText = "Чёрным был поставлен мат";
+                if (team == WHITE) {
+                    setHeaderText("Победа белых!");
+                    setLabelText("Чёрным был поставлен мат");
                 } else {
-                    headerText = "Победа чёрных!";
-                    descriptionText = "Белым был поставлен мат";
+                    setHeaderText("Победа чёрных!");
+                    setLabelText("Белым был поставлен мат");
                 }
                 break;
             case STALEMATE:
-                headerText = "Объявлена ничья";
-                descriptionText = "Партия закончилась патом";
+                setHeaderText("Объявлена ничья");
+                setLabelText("Партия закончилась патом");
+                break;
+            case SURRENDER:
+                if (team == WHITE) {
+                    setHeaderText("Победа белых!");
+                    setLabelText("Чёрные сдались");
+                } else {
+                    setHeaderText("Победа чёрных!");
+                    setLabelText("Белые сдались");
+                }
                 break;
         }
-
-        Label header = new Label(headerText,
-                new LabelStyle(Assets.get(bigFont), COLOR_PURE_WHITE));
-        add(header).height(40);
-        row();
-
-        Label description = new Label(descriptionText,
-                new LabelStyle(Assets.get(smallFont), COLOR_PURE_WHITE));
-        add(description);
-        row();
-
-        TypingLabel reset = new TypingLabel("{WAIT}{JUMP=0.4;0.05;0.5}\nСыграть снова?\n{ENDJUMP}",
-                new LabelStyle(Assets.get(smallFont), COLOR_PURE_WHITE));
-        reset.setAlignment(bottom);
-        add(reset).height(120);
     }
 }

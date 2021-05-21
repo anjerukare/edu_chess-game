@@ -6,6 +6,7 @@ import edu.anjerukare.screens.models.Board;
 import edu.anjerukare.screens.models.Piece;
 import edu.anjerukare.screens.models.pieces.Pawn;
 import edu.anjerukare.screens.utils.Point;
+import edu.anjerukare.screens.utils.SideMenuManager;
 import edu.anjerukare.screens.views.*;
 import edu.anjerukare.screens.views.pieces.BishopView;
 import edu.anjerukare.screens.views.pieces.KnightView;
@@ -22,15 +23,15 @@ public class PawnPromotingListener extends ClickListener {
     private final PawnPromotingView pawnPromotingView;
 
     private final BoardListener boardListener;
-    private final GameOverListener gameOverListener;
+    private final SideMenuManager sideMenuManager;
 
     public PawnPromotingListener(Board board, BoardView boardView, PawnPromotingView pawnPromotingView,
-                                 BoardListener boardListener, GameOverListener gameOverListener) {
+                                 BoardListener boardListener, SideMenuManager sideMenuManager) {
         this.board = board;
         this.boardView = boardView;
         this.pawnPromotingView = pawnPromotingView;
         this.boardListener = boardListener;
-        this.gameOverListener = gameOverListener;
+        this.sideMenuManager = sideMenuManager;
     }
 
     @Override
@@ -61,10 +62,16 @@ public class PawnPromotingListener extends ClickListener {
         board.passTurnToNextPlayer();
         boardListener.updateCheckState();
         if (board.hasCurrentPlayerNoMoves()) {
-            if (board.isCheck())
-                gameOverListener.showViewWith(CHECKMATE);
-            else
-                gameOverListener.showViewWith(STALEMATE);
+            GameOverView gameOverView = sideMenuManager.getView("gameOver");
+            if (board.isCheck()) {
+                boardView.setOverlapped(true);
+                gameOverView.setResult(CHECKMATE);
+                gameOverView.setTeam(board.getOtherPlayerTeam());
+            } else {
+                boardView.setOverlapped(true);
+                gameOverView.setResult(STALEMATE);
+            }
+            sideMenuManager.pushView("gameOver");
         }
     }
 }

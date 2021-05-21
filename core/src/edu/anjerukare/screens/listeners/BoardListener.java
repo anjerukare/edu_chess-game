@@ -1,5 +1,6 @@
 package edu.anjerukare.screens.listeners;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -12,6 +13,7 @@ import edu.anjerukare.screens.models.pieces.King;
 import edu.anjerukare.screens.models.pieces.Pawn;
 import edu.anjerukare.screens.models.pieces.Rook;
 import edu.anjerukare.screens.utils.Point;
+import edu.anjerukare.screens.utils.SideMenuManager;
 import edu.anjerukare.screens.views.*;
 import edu.anjerukare.screens.views.pieces.KingView;
 import edu.anjerukare.screens.views.pieces.PawnView;
@@ -37,21 +39,17 @@ public class BoardListener extends ClickListener {
     protected final Board board;
     protected final BoardView boardView;
     protected final PawnPromotingView pawnPromotingView;
-    protected final GameOverView gameOverView;
-    protected final GameInfoView gameInfoView;
 
-    private final GameOverListener gameOverListener;
+    private final SideMenuManager sideMenuManager;
 
     public BoardListener(Board board, BoardView boardView, PawnPromotingView pawnPromotingView,
-                         GameOverView gameOverView, GameInfoView gameInfoView, GameOverListener gameOverListener) {
-        this.gameOverListener = gameOverListener;
+                         SideMenuManager sideMenuManager) {
         game = (Chess) Gdx.app.getApplicationListener();
 
         this.board = board;
         this.boardView = boardView;
         this.pawnPromotingView = pawnPromotingView;
-        this.gameOverView = gameOverView;
-        this.gameInfoView = gameInfoView;
+        this.sideMenuManager = sideMenuManager;
     }
 
     @Override
@@ -201,6 +199,7 @@ public class BoardListener extends ClickListener {
 
     private void turnIsDone() {
         board.passTurnToNextPlayer();
+        SideMenuView gameInfoView = sideMenuManager.getView("gameInfo");
         if (board.getCurrentPlayerTeam() == WHITE)
             gameInfoView.setLabelText(WHITE_MOVE);
         else
@@ -208,9 +207,15 @@ public class BoardListener extends ClickListener {
     }
 
     private void gameIsOver() {
-        if (board.isCheck())
-            gameOverListener.showViewWith(CHECKMATE);
-        else
-            gameOverListener.showViewWith(STALEMATE);
+        GameOverView gameOverView = sideMenuManager.getView("gameOver");
+        if (board.isCheck()) {
+            boardView.setOverlapped(true);
+            gameOverView.setResult(CHECKMATE);
+            gameOverView.setTeam(board.getOtherPlayerTeam());
+        } else {
+            boardView.setOverlapped(true);
+            gameOverView.setResult(STALEMATE);
+        }
+        sideMenuManager.pushView("gameOver");
     }
 }
