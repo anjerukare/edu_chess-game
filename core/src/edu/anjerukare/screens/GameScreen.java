@@ -67,7 +67,7 @@ public class GameScreen extends ManagedScreenAdapter {
     }
 
     private void initializeTable(BoardView boardView, SideMenuManager sideMenuManager) {
-        LabelStyle labelStyle = new LabelStyle(Assets.get(bigFont), COLOR_LIGHT_WHITE);
+        LabelStyle labelStyle = new LabelStyle(Assets.get(bigFont), COLOR_WHITE);
 
         Table digits = new Table();
         for (int i = 0; i < 8; ++i) {

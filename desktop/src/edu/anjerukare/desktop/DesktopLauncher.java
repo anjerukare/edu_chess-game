@@ -10,6 +10,7 @@ public class DesktopLauncher {
 		/* equals: config.setTitle("Шахматы") */
 		config.setTitle("\u0428\u0430\u0445\u043c\u0430\u0442\u044b");
 		config.setWindowedMode(800, 480);
+		config.setWindowSizeLimits(800, 480, -1, -1);
 		new Lwjgl3Application(new Chess(), config);
 	}
 }
