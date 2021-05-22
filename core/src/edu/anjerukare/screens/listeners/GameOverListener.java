@@ -22,7 +22,10 @@ public class GameOverListener extends ClickListener {
 
     @Override
     public void clicked(InputEvent event, float x, float y) {
-        if (event.getTarget().getName().equals("reset")) {
+        String targetName = event.getTarget().getName();
+        if (targetName == null) return;
+
+        if (targetName.equals("reset")) {
             board.reset();
             boardView.resetPieces();
             sideMenuManager.getView("gameInfo").setLabelText(WHITE_MOVE);

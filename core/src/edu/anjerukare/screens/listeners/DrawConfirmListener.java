@@ -20,7 +20,10 @@ public class DrawConfirmListener extends ClickListener {
 
     @Override
     public void clicked(InputEvent event, float x, float y) {
-        switch (event.getTarget().getName()) {
+        String targetName = event.getTarget().getName();
+        if (targetName == null) return;
+
+        switch (targetName) {
             case "yes":
                 GameOverView gameOverView = sideMenuManager.getView("gameOver");
                 gameOverView.setResult(DRAW);

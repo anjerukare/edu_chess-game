@@ -27,7 +27,10 @@ public class GameInfoListener extends ClickListener {
 
     @Override
     public void clicked(InputEvent event, float x, float y) {
-        switch (event.getTarget().getName()) {
+        String targetName = event.getTarget().getName();
+        if (targetName == null) return;
+
+        switch (targetName) {
             case "surrender": {
                 GameOverView gameOverView = sideMenuManager.getView("gameOver");
                 boardView.setOverlapped(true);
