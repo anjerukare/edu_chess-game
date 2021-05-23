@@ -1,12 +1,12 @@
 
 skin.png
-size: 128,128
+size: 512,512
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 button_disabled
   rotate: false
-  xy: 39, 43
+  xy: 338, 332
   size: 36, 40
   split: 0, 0, 0, 5
   pad: 0, 0, 0, 0
@@ -15,7 +15,7 @@ button_disabled
   index: -1
 button_down
   rotate: false
-  xy: 1, 1
+  xy: 39, 288
   size: 36, 40
   split: 0, 0, 4, 0
   pad: 0, 0, 0, 0
@@ -24,7 +24,7 @@ button_down
   index: -1
 button_up
   rotate: false
-  xy: 1, 81
+  xy: 1, 288
   size: 36, 40
   split: 0, 0, 0, 5
   pad: 0, 0, 0, 0
@@ -33,21 +33,28 @@ button_up
   index: -1
 draw
   rotate: false
-  xy: 39, 85
+  xy: 1, 250
   size: 36, 36
   orig: 36, 36
   offset: 0, 0
   index: -1
 github
   rotate: false
-  xy: 77, 85
+  xy: 376, 374
   size: 36, 36
   orig: 36, 36
   offset: 0, 0
   index: -1
+logo
+  rotate: false
+  xy: 1, 330
+  size: 335, 80
+  orig: 335, 80
+  offset: 0, 0
+  index: -1
 surrender
   rotate: false
-  xy: 1, 43
+  xy: 338, 374
   size: 36, 36
   orig: 36, 36
   offset: 0, 0
