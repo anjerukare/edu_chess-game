@@ -8,7 +8,7 @@ import edu.anjerukare.Assets;
 import edu.anjerukare.screens.enums.Team;
 import edu.anjerukare.screens.utils.JumpingButton;
 
-import static edu.anjerukare.Assets.*;
+import static edu.anjerukare.Assets.COLOR_LIGHT_WHITE;
 import static edu.anjerukare.screens.enums.Team.WHITE;
 import static edu.anjerukare.screens.views.GameOverView.GameResult.CHECKMATE;
 

@@ -1,14 +1,13 @@
 package edu.anjerukare.screens.views;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import edu.anjerukare.Assets;
 import edu.anjerukare.screens.utils.JumpingButton;
 
-import static com.badlogic.gdx.scenes.scene2d.Touchable.disabled;
-import static edu.anjerukare.Assets.*;
+import static edu.anjerukare.Assets.COLOR_LIGHT_WHITE;
+import static edu.anjerukare.Assets.smallFont;
 
 public class DrawConfirmView extends SideMenuView {
 
