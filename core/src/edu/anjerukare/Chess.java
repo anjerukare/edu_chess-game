@@ -8,6 +8,7 @@ import de.eskalon.commons.screen.ManagedScreen;
 import de.eskalon.commons.screen.transition.ScreenTransition;
 import de.eskalon.commons.screen.transition.impl.BlendingTransition;
 import de.eskalon.commons.screen.transition.impl.GLTransitionsShaderTransition;
+import edu.anjerukare.screens.AboutScreen;
 import edu.anjerukare.screens.GameScreen;
 import edu.anjerukare.screens.MainMenuScreen;
 
@@ -25,6 +26,7 @@ public class Chess extends ManagedGame<ManagedScreen, ScreenTransition> {
 
 		screenManager.addScreen("mainMenu", new MainMenuScreen());
 		screenManager.addScreen("game", new GameScreen());
+		screenManager.addScreen("about", new AboutScreen());
 
 		BlendingTransition blendingTransition = new BlendingTransition(batch, .5f);
 		screenManager.addScreenTransition("blending", blendingTransition);

@@ -10,6 +10,7 @@ import java.util.NoSuchElementException;
 public class SideMenuManager {
 
     private final Map<String, SideMenuView> sideMenuViews = new HashMap<>();
+    private SideMenuView currentView;
     private Cell<SideMenuView> cell;
 
     public void setViewsCell(Cell<SideMenuView> cell) {
@@ -17,6 +18,7 @@ public class SideMenuManager {
     }
 
     public void addView(String name, SideMenuView sideMenuView) {
+        sideMenuView.setVisible(false);
         sideMenuViews.put(name, sideMenuView);
     }
 
@@ -27,7 +29,10 @@ public class SideMenuManager {
         if (sideMenuView == null)
             throw new NoSuchElementException("No view with name '" + name + "'");
 
+        if (currentView != null) currentView.setVisible(false);
+        sideMenuView.setVisible(true);
         cell.setActor(sideMenuView);
+        currentView = sideMenuView;
     }
 
     public <T extends SideMenuView> T getView(String name) {

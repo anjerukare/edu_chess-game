@@ -19,12 +19,12 @@ public class GameInfoView extends SideMenuView {
     public final static String BLACK_MOVE = "Ходят чёрные";
 
     public GameInfoView() {
-        Image surrender = new Image(Assets.get(skin).getPatch("surrender"));
+        Image surrender = new Image(Assets.get(skin).getDrawable("surrender"));
         surrender.setTouchable(disabled);
         surrenderButton = new JumpingButton(surrender, Assets.get(skin));
         surrenderButton.setName("surrender");
         buttons.add(surrenderButton);
-        Image draw = new Image(Assets.get(skin).getPatch("draw"));
+        Image draw = new Image(Assets.get(skin).getDrawable("draw"));
         draw.setTouchable(disabled);
         drawButton = new JumpingButton(draw, Assets.get(skin));
         drawButton.setName("draw");

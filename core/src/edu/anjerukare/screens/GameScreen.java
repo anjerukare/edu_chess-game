@@ -18,6 +18,7 @@ import edu.anjerukare.screens.views.*;
 
 import static com.badlogic.gdx.utils.Align.center;
 import static edu.anjerukare.Assets.*;
+import static edu.anjerukare.screens.views.GameInfoView.WHITE_MOVE;
 
 public class GameScreen extends ManagedScreenAdapter {
 
@@ -26,20 +27,24 @@ public class GameScreen extends ManagedScreenAdapter {
 
     private final Table root = new Table();
 
+    private final Board board;
+    private final BoardView boardView;
+    private final SideMenuManager sideMenuManager;
+
     public GameScreen() {
         game = (Chess) Gdx.app.getApplicationListener();
 
         stage = new Stage(new FitViewport(800, 480));
         addInputProcessor(stage);
 
-        Board board = new Board();
-        BoardView boardView = new BoardView();
+        board = new Board();
+        boardView = new BoardView();
 
         PawnPromotingView pawnPromotingView = new PawnPromotingView();
         pawnPromotingView.setPosition((stage.getWidth() - boardView.getWidth()) / 2,
                 (stage.getHeight() - boardView.getHeight()) / 2);
 
-        SideMenuManager sideMenuManager = new SideMenuManager();
+        sideMenuManager = new SideMenuManager();
         GameInfoView gameInfoView = new GameInfoView();
         gameInfoView.addListener(new GameInfoListener(sideMenuManager, board, boardView));
         sideMenuManager.addView("gameInfo", gameInfoView);
@@ -60,6 +65,7 @@ public class GameScreen extends ManagedScreenAdapter {
         root.setFillParent(true);
         root.padTop(44);
         initializeTable(boardView, sideMenuManager);
+        sideMenuManager.pushView("gameInfo");
 
         stage.addActor(root);
         stage.addActor(pawnPromotingView);
@@ -94,6 +100,16 @@ public class GameScreen extends ManagedScreenAdapter {
             letters.add(letter).prefSize(44);
         }
         root.add(letters);
+    }
+
+    @Override
+    public void show() {
+        super.show();
+        board.reset();
+        boardView.resetPieces();
+        sideMenuManager.getView("gameInfo").setLabelText(WHITE_MOVE);
+        sideMenuManager.pushView("gameInfo");
+        boardView.setOverlapped(false);
     }
 
     @Override

@@ -1,10 +1,13 @@
 package edu.anjerukare.screens.utils;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+
+import static com.badlogic.gdx.scenes.scene2d.Touchable.disabled;
 
 public class JumpingButton extends Button {
 
@@ -12,31 +15,20 @@ public class JumpingButton extends Button {
 
     public JumpingButton(Actor child, Skin skin) {
         super(child, skin);
-        addListener(new ClickListener() {
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                press();
-                return super.touchDown(event, x, y, pointer, button);
-            }
+    }
 
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                super.touchUp(event, x, y, pointer, button);
-                release();
-            }
+    public JumpingButton(String innerLabelText, LabelStyle labelStyle, Skin skin) {
+        super(skin);
+        Label label = new Label(innerLabelText, labelStyle);
+        label.setTouchable(disabled);
+        add(label);
+    }
 
-            @Override
-            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-                super.exit(event, x, y, pointer, toActor);
-                release();
-            }
-
-            @Override
-            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                super.enter(event, x, y, pointer, fromActor);
-                if (isPressed()) press();
-            }
-        });
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        super.draw(batch, parentAlpha);
+        if (isPressed()) press();
+        else release();
     }
 
     private void press() {

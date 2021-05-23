@@ -38,6 +38,13 @@ draw
   orig: 36, 36
   offset: 0, 0
   index: -1
+github
+  rotate: false
+  xy: 77, 85
+  size: 36, 36
+  orig: 36, 36
+  offset: 0, 0
+  index: -1
 surrender
   rotate: false
   xy: 1, 43
