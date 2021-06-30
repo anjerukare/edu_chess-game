@@ -106,7 +106,7 @@ public class GameScreen extends ManagedScreenAdapter {
     public void show() {
         super.show();
         board.reset();
-        boardView.resetPieces();
+        boardView.reset();
         sideMenuManager.getView("gameInfo").setLabelText(WHITE_MOVE);
         sideMenuManager.pushView("gameInfo");
         boardView.setOverlapped(false);

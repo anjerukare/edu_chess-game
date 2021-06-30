@@ -34,7 +34,7 @@ public class GameOverListener extends ClickListener {
         switch (targetName) {
             case "reset":
                 board.reset();
-                boardView.resetPieces();
+                boardView.reset();
                 sideMenuManager.getView("gameInfo").setLabelText(WHITE_MOVE);
                 sideMenuManager.pushView("gameInfo");
                 boardView.setOverlapped(false);

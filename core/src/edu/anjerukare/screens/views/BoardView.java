@@ -60,7 +60,7 @@ public class BoardView extends Group {
         addTile(new TileView(COLOR_GRAY, new RookView(Team.BLACK)), 7, 7);
     }
 
-    public void resetPieces() {
+    public void reset() {
         for (int i = 0; i < 8; ++i) {
             for (int j = 0; j < 8; ++j) {
                 removeActor(tiles[i][j].piece);
@@ -93,6 +93,7 @@ public class BoardView extends Group {
         setPiece(7, 7, new RookView(Team.BLACK));
 
         selectedPiece = null;
+        resetTileStates();
     }
 
     public void addTile(TileView tile, int i, int j) {
