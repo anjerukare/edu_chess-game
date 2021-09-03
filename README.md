@@ -17,6 +17,23 @@
 * Пиксельный шрифт "Pixel Cyr Normal" был взят из свободных источников;
 * Звуковые эффекты скачаны с сайта [freesoundeffect.net][FSE].
 
+## Скриншоты игры
+  1. Главное меню;
+
+![Main menu](https://i.ibb.co/YcmjXxQ/main-menu.png)
+
+  2. Экран "Об игре";
+
+![About](https://i.ibb.co/2ZbxFQg/about.png)
+
+  3. Игровой экран;
+
+![Game screen](https://i.ibb.co/x7bh7rp/game-screen.png)
+
+  4. Результат матча при победе матом.
+
+![Victory by checkmate](https://i.ibb.co/CzGQycn/victory-by-checkmate.png)
+
 [//]: # (Ссылки на материалы для подробного ознакомления)
 
   [TL]: <https://github.com/rafaskb/typing-label>
